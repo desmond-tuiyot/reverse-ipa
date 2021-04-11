@@ -1,0 +1,72 @@
+import { useState } from "react";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Collapse from "@material-ui/core/Collapse";
+
+import IPASymbolContainer from "./IPASymbolContainer";
+import { makeStyles } from "@material-ui/styles";
+import { consonants, vowels } from "../data/ipa";
+
+const useStyles = makeStyles((theme) => ({
+  showIpaText: {
+    fontSize: "0.9rem",
+    // marginLeft: "5px",
+    textTransform: "capitalize",
+    background: ({ background }) => background,
+    padding: theme.spacing(1),
+    borderRadius: "10px 10px 0 0",
+  },
+  showIpaButton: {
+    padding: 0,
+    // marginBottom: theme.spacing(1),
+  },
+  keyboard: {
+    background: "rgba(245,242,247)",
+    padding: theme.spacing(1),
+    borderRadius: "0 10px 10px 10px",
+  },
+}));
+
+const IPAKeyboard = () => {
+  const [showIpa, setShowIpa] = useState(false);
+  const styleProps = {
+    background: showIpa ? "rgba(245,242,247)" : "none",
+  };
+  const classes = useStyles(styleProps);
+
+  const handleClick = () => {
+    setShowIpa(!showIpa);
+  };
+
+  return (
+    <Grid container justify="center">
+      <Grid item xs={12}>
+        <Button onClick={handleClick} className={classes.showIpaButton}>
+          <Typography color="primary" className={classes.showIpaText}>
+            {showIpa ? "Hide IPA Keyboard" : "Show IPA Keyboard"}
+          </Typography>
+        </Button>
+      </Grid>
+      <Collapse in={showIpa}>
+        <Grid
+          container
+          item
+          xs={12}
+          justify="center"
+          spacing={0}
+          className={classes.keyboard}
+        >
+          <Grid item xs={12}>
+            <IPASymbolContainer title="Consonants" symbols={consonants} />
+          </Grid>
+          <Grid item xs={12}>
+            <IPASymbolContainer title="Vowels" symbols={vowels} />
+          </Grid>
+        </Grid>
+      </Collapse>
+    </Grid>
+  );
+};
+
+export default IPAKeyboard;
