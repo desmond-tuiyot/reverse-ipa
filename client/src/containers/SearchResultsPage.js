@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -6,8 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
 
 import SearchComponent from "./SearchComponent";
-import SearchResultsCard from "../containers/SearchResultsCard";
-import { selectSearchResults } from "../slices/search";
+import SearchResultsCard from "../components/SearchResultsCard";
+import { selectSearchResults } from "../selectors";
+import { resetState } from "../slices/search";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,19 +29,20 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchResultsPage = () => {
   const classes = useStyles();
+  let dispatch = useDispatch();
   let searchResults = useSelector(selectSearchResults);
   let history = useHistory();
+
+  const handleClick = () => {
+    dispatch(resetState());
+    history.push("/");
+  };
 
   return (
     <Container maxWidth="sm">
       <Grid container spacing={3} justify="center" className={classes.root}>
         <Grid item xs={12}>
-          <div
-            onClick={() => {
-              history.push("/");
-            }}
-            className={classes.headerDiv}
-          >
+          <div onClick={handleClick} className={classes.headerDiv}>
             <Typography className={classes.header}>Reverse IPA</Typography>
           </div>
         </Grid>

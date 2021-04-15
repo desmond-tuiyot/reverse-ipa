@@ -4,17 +4,16 @@ import Grid from "@material-ui/core/Grid";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import SearchBar from "../containers/SearchBar";
+import SearchBar from "../components/SearchBar";
 import Filters from "./Filters";
 import IPAKeyboard from "./IPAKeyboard";
+import { updateSearchBar, fetchResults } from "../slices/search";
 import {
-  updateSearchBar,
   selectSearchTerm,
   selectSearchType,
   selectPosition,
-  fetchResults,
   selectLoadedCount,
-} from "../slices/search";
+} from "../selectors";
 
 // const useQuery = () => {
 //   return new URLSearchParams(useLocation().search);

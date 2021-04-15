@@ -3,12 +3,10 @@ import { makeStyles } from "@material-ui/styles";
 
 import FilterDropDown from "../components/FilterDropDown";
 import {
-  selectLanguage,
-  selectPosition,
-  selectSearchType,
   setFilters,
   // selectSortOption,
 } from "../slices/search";
+import { selectLanguage, selectPosition, selectSearchType } from "../selectors";
 
 const useStyles = makeStyles((theme) => ({
   filterRoot: {
