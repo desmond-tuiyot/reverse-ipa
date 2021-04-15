@@ -16,8 +16,6 @@ import {
   selectLoadedCount,
 } from "../slices/search";
 
-
-
 // const useQuery = () => {
 //   return new URLSearchParams(useLocation().search);
 // };

@@ -6,7 +6,7 @@ import Collapse from "@material-ui/core/Collapse";
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateSearchBar, selectSearchTerm } from "../slices/search";
-import IPASymbolContainer from "../containers/IPAKeyboard/IPASymbolContainer";
+import IPASymbolContainer from "../components/IPAKeyboard/IPASymbolContainer";
 import { makeStyles } from "@material-ui/styles";
 import { consonants, vowels } from "../data/ipa";
 
@@ -67,10 +67,18 @@ const IPAKeyboard = () => {
           className={classes.keyboard}
         >
           <Grid item xs={12}>
-            <IPASymbolContainer title="Consonants" symbols={consonants} handleClick={handleClick} />
+            <IPASymbolContainer
+              title="Consonants"
+              symbols={consonants}
+              handleClick={handleClick}
+            />
           </Grid>
           <Grid item xs={12}>
-            <IPASymbolContainer title="Vowels" symbols={vowels} handleClick={handleClick}/>
+            <IPASymbolContainer
+              title="Vowels"
+              symbols={vowels}
+              handleClick={handleClick}
+            />
           </Grid>
         </Grid>
       </Collapse>

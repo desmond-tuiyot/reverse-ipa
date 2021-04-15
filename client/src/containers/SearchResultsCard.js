@@ -61,17 +61,16 @@ const SearchResultsCard = ({ searchResults, searchTerm }) => {
               </Typography>
             </div>
             <div className={classes.searchResultsDiv}>
-              {searchResults &&
-                searchResults.map((ipaTranscription, index) => (
-                  <Chip
-                    key={index}
-                    className={classes.chip}
-                    label={ipaTranscription}
-                    variant="outlined"
-                    color="primary"
-                    size="small"
-                  />
-                ))}
+              {searchResults.map((ipaTranscription, index) => (
+                <Chip
+                  key={index}
+                  className={classes.chip}
+                  label={ipaTranscription}
+                  variant="outlined"
+                  color="primary"
+                  size="small"
+                />
+              ))}
             </div>
           </div>
         </Grid>

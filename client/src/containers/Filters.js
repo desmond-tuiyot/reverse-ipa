@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 
-import FilterDropDown from "../containers/FilterDropDown";
+import FilterDropDown from "../components/FilterDropDown";
 import {
   selectLanguage,
   selectPosition,

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -6,22 +5,6 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import ClearIcon from "@material-ui/icons/Clear";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
-
-import {
-  updateSearchBar,
-  selectSearchTerm,
-  selectSearchType,
-  selectSearchTermPosition,
-  selectStatus,
-  fetchResults,
-  setSearchResults,
-} from "../slices/search";
-
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,63 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchBar = ({ searchTerm, handleSearch }) => {
-  // const searchTerm = useSelector(selectSearchTerm);
-  // const searchType = useSelector(selectSearchType);
-  // const searchTermPosition = useSelector(selectSearchTermPosition);
-
-  const status = useSelector(selectStatus);
-  const dispatch = useDispatch();
-
-  let history = useHistory();
-  let query = useQuery();
-
+const SearchBar = ({ searchTerm, handleChange, handleSearch, handleClear }) => {
   const classes = useStyles();
-
-  // useEffect(() => {
-  //   let currentTerm = query.get("term");
-  //   if (currentTerm && status === "succeeded" && currentTerm !== searchTerm) {
-  //     console.log(currentTerm, searchTermPosition);
-  //     dispatch(updateSearchBar(currentTerm));
-  //     dispatch(
-  //       fetchResults({
-  //         term: searchTerm,
-  //         type: searchType,
-  //         position: searchTermPosition,
-  //       })
-  //     );
-  //   }
-  // });
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    let value = e.target.value.trim().toLowerCase();
-    dispatch(updateSearchBar(value));
-  };
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    dispatch(updateSearchBar(""));
-  };
-
-  // const handleSearch = () => {
-  //   if (searchTerm.length > 0) {
-  //     dispatch(setSearchResults([]));
-  //     dispatch(
-  //       fetchResults({
-  //         term: searchTerm,
-  //         type: searchType,
-  //         position: searchTermPosition,
-  //         skip: 0,
-  //       })
-  //     );
-  //     history.push(
-  //       `/results/?term=${searchTerm}&type=${searchType}&position=${searchTermPosition}`
-  //     );
-  //   } else {
-  //     console.log("damn you got it wrong fam");
-  //   }
-  // };
 
   return (
     <Paper className={classes.root}>

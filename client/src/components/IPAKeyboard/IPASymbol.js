@@ -1,9 +1,6 @@
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import { useDispatch, useSelector } from "react-redux";
-
-import { updateSearchBar, selectSearchTerm } from "../../slices/search";
 
 const useStyles = makeStyles((theme) => ({
   symbolContainer: {
@@ -37,7 +34,9 @@ const IPASymbol = ({ symbol, handleClick }) => {
         className={classes.symbolContainer}
         elevation={0}
         square
-        onClick={() => {handleClick(symbol)}}
+        onClick={() => {
+          handleClick(symbol);
+        }}
       >
         <Typography className={classes.symbol}>{symbol}</Typography>
       </Paper>
