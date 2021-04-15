@@ -34,7 +34,6 @@ const SearchResultsPage = () => {
   let history = useHistory();
 
   const handleClick = () => {
-    dispatch(resetState());
     history.push("/");
   };
 

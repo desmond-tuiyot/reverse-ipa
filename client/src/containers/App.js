@@ -3,9 +3,9 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import theme from "../theme";
+import store from "../store";
 import HomePage from "./HomePage";
 import SearchResultsPage from "./SearchResultsPage";
-import store from "../store";
 
 function App() {
   return (
@@ -17,7 +17,12 @@ function App() {
             <Route path="/results">
               <SearchResultsPage />
             </Route>
-            <Route path="/">
+            <Route
+              path="/"
+              onEnter={() => {
+                console.log("hje");
+              }}
+            >
               <HomePage />
             </Route>
           </Switch>

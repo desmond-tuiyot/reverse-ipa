@@ -32,9 +32,9 @@ const SearchComponent = () => {
 
   let history = useHistory();
 
-  useEffect(() => {
-    handleSearch();
-  }, [searchType, position]);
+  // useEffect(() => {
+  //   handleSearch();
+  // }, [searchType, position]);
 
   const handleChange = (e) => {
     e.preventDefault();

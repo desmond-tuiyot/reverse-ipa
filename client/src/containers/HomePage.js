@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
 
 import SearchComponent from "./SearchComponent";
+import { resetState } from "../slices/search";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +26,12 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetState());
+  }, []);
+
   return (
     <Container maxWidth="sm">
       <Grid
