@@ -44,7 +44,10 @@ const SearchComponent = () => {
         })
       );
     }
-  }, [searchTerm, dispatch, searchType, position, loadedCount]);
+    history.push(
+      `/results/?term=${searchTerm}&type=${searchType}&position=${position}`
+    );
+  }, [searchTerm, history, searchType, position, dispatch, loadedCount]);
 
   useEffect(() => {
     if (pathname === "/results/") {
