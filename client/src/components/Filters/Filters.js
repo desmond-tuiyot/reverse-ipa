@@ -11,7 +11,7 @@ import {
   setSearchType,
   // selectSortOption,
   // setSortOption,
-} from "../../slices/searchSlice";
+} from "../../slices/search";
 
 const useStyles = makeStyles((theme) => ({
   filterRoot: {

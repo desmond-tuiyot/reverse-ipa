@@ -17,7 +17,7 @@ import {
   selectStatus,
   fetchResults,
   setSearchResults,
-} from "../slices/searchSlice";
+} from "../slices/search";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);

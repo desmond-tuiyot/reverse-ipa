@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch, useSelector } from "react-redux";
 
-import { updateSearchBar, selectSearchTerm } from "../slices/search";
+import { updateSearchBar, selectSearchTerm } from "../../slices/search";
 
 const useStyles = makeStyles((theme) => ({
   symbolContainer: {
@@ -28,14 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IPASymbol = ({ symbol }) => {
+const IPASymbol = ({ symbol, handleClick }) => {
   const classes = useStyles();
-  const searchTerm = useSelector(selectSearchTerm);
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(updateSearchBar(searchTerm + symbol));
-  };
 
   return (
     <>
@@ -43,7 +37,7 @@ const IPASymbol = ({ symbol }) => {
         className={classes.symbolContainer}
         elevation={0}
         square
-        onClick={handleClick}
+        onClick={() => {handleClick(symbol)}}
       >
         <Typography className={classes.symbol}>{symbol}</Typography>
       </Paper>

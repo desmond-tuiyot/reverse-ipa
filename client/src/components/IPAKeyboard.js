@@ -3,8 +3,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
+import { useDispatch, useSelector } from "react-redux";
 
-import IPASymbolContainer from "./IPASymbolContainer";
+import { updateSearchBar, selectSearchTerm } from "../slices/search";
+import IPASymbolContainer from "../containers/IPAKeyboard/IPASymbolContainer";
 import { makeStyles } from "@material-ui/styles";
 import { consonants, vowels } from "../data/ipa";
 
@@ -30,19 +32,26 @@ const useStyles = makeStyles((theme) => ({
 
 const IPAKeyboard = () => {
   const [showIpa, setShowIpa] = useState(false);
+  const searchTerm = useSelector(selectSearchTerm);
+  const dispatch = useDispatch();
+
   const styleProps = {
     background: showIpa ? "rgba(245,242,247)" : "none",
   };
   const classes = useStyles(styleProps);
 
-  const handleClick = () => {
+  const handleShowIpa = () => {
     setShowIpa(!showIpa);
+  };
+
+  const handleClick = (symbol) => {
+    dispatch(updateSearchBar(searchTerm + symbol));
   };
 
   return (
     <Grid container justify="center">
       <Grid item xs={12}>
-        <Button onClick={handleClick} className={classes.showIpaButton}>
+        <Button onClick={handleShowIpa} className={classes.showIpaButton}>
           <Typography color="primary" className={classes.showIpaText}>
             {showIpa ? "Hide IPA Keyboard" : "Show IPA Keyboard"}
           </Typography>
@@ -58,10 +67,10 @@ const IPAKeyboard = () => {
           className={classes.keyboard}
         >
           <Grid item xs={12}>
-            <IPASymbolContainer title="Consonants" symbols={consonants} />
+            <IPASymbolContainer title="Consonants" symbols={consonants} handleClick={handleClick} />
           </Grid>
           <Grid item xs={12}>
-            <IPASymbolContainer title="Vowels" symbols={vowels} />
+            <IPASymbolContainer title="Vowels" symbols={vowels} handleClick={handleClick}/>
           </Grid>
         </Grid>
       </Collapse>

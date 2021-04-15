@@ -1,72 +1,90 @@
 // import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
 
+import SearchBar from "../containers/SearchBar";
+import Filters from "./Filters";
+import IPAKeyboard from "./IPAKeyboard";
 import {
   updateSearchBar,
   selectSearchTerm,
   selectSearchType,
-  selectSearchTermPosition,
-  selectStatus,
+  selectPosition,
   fetchResults,
-  setSearchResults,
-} from "../slices/searchSlice";
-import SearchBar from "./SearchBar";
-import Filters from "./Filters";
-import IPAKeyboard from "./IPAKeyboard";
+  selectLoadedCount,
+} from "../slices/search";
+
+
+
+// const useQuery = () => {
+//   return new URLSearchParams(useLocation().search);
+// };
+
 /**
  * Holds the search bar, the filter, and the IPA keyboard
  */
 const SearchComponent = () => {
   const searchTerm = useSelector(selectSearchTerm);
   const searchType = useSelector(selectSearchType);
-  const searchTermPosition = useSelector(selectSearchTermPosition);
+  const position = useSelector(selectPosition);
+  const loadedCount = useSelector(selectLoadedCount);
 
-  const status = useSelector(selectStatus);
   const dispatch = useDispatch();
 
   let history = useHistory();
 
+  useEffect(() => {
+    handleSearch();
+  }, [searchType, position]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    let value = e.target.value.trim().toLowerCase();
+    dispatch(updateSearchBar(value));
+  };
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    dispatch(updateSearchBar(""));
+  };
+
   const handleSearch = () => {
     if (searchTerm.length > 0) {
-      dispatch(setSearchResults([]));
       dispatch(
         fetchResults({
           term: searchTerm,
           type: searchType,
-          position: searchTermPosition,
-          skip: 0,
+          position: position,
+          skip: loadedCount,
         })
       );
       history.push(
-        `/results/?term=${searchTerm}&type=${searchType}&position=${searchTermPosition}`
+        `/results/?term=${searchTerm}&type=${searchType}&position=${position}`
       );
     } else {
       console.log("damn you got it wrong fam");
     }
   };
 
+  let searchProps = {
+    searchTerm,
+    handleChange,
+    handleSearch,
+    handleClear,
+  };
+
   return (
     <>
       <Grid item xs={12}>
-        <SearchBar
-          searchTerm={searchTerm}
-          searchType={searchType}
-          searchTermPosition={searchTermPosition}
-          handleSearch={handleSearch}
-        />
+        <SearchBar {...searchProps} />
       </Grid>
       <Grid item xs={12}>
         <IPAKeyboard />
       </Grid>
       <Grid item xs={12}>
-        <Filters
-          searchTerm={searchTerm}
-          searchType={searchType}
-          searchTermPosition={searchTermPosition}
-          handleSearch={handleSearch}
-        />
+        <Filters handleSearch={handleSearch} />
       </Grid>
     </>
   );
