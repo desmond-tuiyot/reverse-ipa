@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -8,7 +8,6 @@ import { useHistory } from "react-router";
 import SearchComponent from "./SearchComponent";
 import SearchResultsCard from "../components/SearchResultsCard";
 import { selectSearchResults } from "../selectors";
-import { resetState } from "../slices/search";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchResultsPage = () => {
   const classes = useStyles();
-  let dispatch = useDispatch();
   let searchResults = useSelector(selectSearchResults);
   let history = useHistory();
 

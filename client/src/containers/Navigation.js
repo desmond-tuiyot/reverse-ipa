@@ -12,12 +12,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
   },
   navItems: {
-    // margin: theme.spacing(2),
     color: theme.palette.primary.light,
   },
-  toolbar: {
-    // maxWidth: "1200px",
-  },
+  toolbar: {},
 
   title: {
     flexGrow: 1,
@@ -30,7 +27,6 @@ const Navigation = () => {
   return (
     <>
       <AppBar color="inherit">
-        {/* <Container maxWidth="lg"> */}
         <Toolbar className={classes.toolbar}>
           <Typography variant="h5" className={classes.title}>
             Reverse IPA
@@ -43,7 +39,6 @@ const Navigation = () => {
             <Typography className={classes.navItems}>Sign Up</Typography>
           </Button>
         </Toolbar>
-        {/* </Container> */}
       </AppBar>
       <div className={classes.toolbarMargin} />
     </>

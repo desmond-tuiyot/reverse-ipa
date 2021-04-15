@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: theme.typography.pxToRem(14),
-    // opacity: 0.6,
   },
 }));
 

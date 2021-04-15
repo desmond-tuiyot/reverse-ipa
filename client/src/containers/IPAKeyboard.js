@@ -14,7 +14,6 @@ import { consonants, vowels } from "../data/ipa";
 const useStyles = makeStyles((theme) => ({
   showIpaText: {
     fontSize: "0.9rem",
-    // marginLeft: "5px",
     textTransform: "capitalize",
     background: ({ background }) => background,
     padding: theme.spacing(1),
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
   showIpaButton: {
     padding: 0,
-    // marginBottom: theme.spacing(1),
   },
   keyboard: {
     background: "rgba(245,242,247)",

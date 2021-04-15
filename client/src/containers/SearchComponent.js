@@ -32,9 +32,38 @@ const SearchComponent = () => {
 
   let history = useHistory();
   let { pathname } = useLocation();
-  // console.log(location);
 
-  const handleSearch = useCallback(() => {
+  const handleRefresh = useCallback(() => {
+    if (searchTerm.length > 0) {
+      dispatch(
+        fetchResults({
+          term: searchTerm,
+          type: searchType,
+          position: position,
+          skip: loadedCount,
+        })
+      );
+    }
+  }, [searchTerm, dispatch, searchType, position, loadedCount]);
+
+  useEffect(() => {
+    if (pathname === "/results/") {
+      handleRefresh();
+    }
+  }, [pathname, handleRefresh]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    let value = e.target.value.trim().toLowerCase();
+    dispatch(updateSearchBar(value));
+  };
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    dispatch(updateSearchBar(""));
+  };
+
+  const handleSearch = () => {
     if (searchTerm.length > 0) {
       dispatch(
         fetchResults({
@@ -50,24 +79,6 @@ const SearchComponent = () => {
     } else {
       console.log("damn you got it wrong fam");
     }
-  }, [searchTerm, dispatch, searchType, position, loadedCount, history]);
-
-  useEffect(() => {
-    console.log("here");
-    if (pathname === "/results/") {
-      handleSearch();
-    }
-  }, [pathname, handleSearch]);
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    let value = e.target.value.trim().toLowerCase();
-    dispatch(updateSearchBar(value));
-  };
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    dispatch(updateSearchBar(""));
   };
 
   let searchProps = {

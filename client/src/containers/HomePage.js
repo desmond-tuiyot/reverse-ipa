@@ -30,7 +30,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(resetState());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container maxWidth="sm">
