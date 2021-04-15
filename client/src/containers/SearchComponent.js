@@ -1,8 +1,8 @@
 // import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router";
 
 import SearchBar from "../components/SearchBar";
 import Filters from "./Filters";
@@ -31,23 +31,10 @@ const SearchComponent = () => {
   const dispatch = useDispatch();
 
   let history = useHistory();
+  let { pathname } = useLocation();
+  // console.log(location);
 
-  // useEffect(() => {
-  //   handleSearch();
-  // }, [searchType, position]);
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    let value = e.target.value.trim().toLowerCase();
-    dispatch(updateSearchBar(value));
-  };
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    dispatch(updateSearchBar(""));
-  };
-
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     if (searchTerm.length > 0) {
       dispatch(
         fetchResults({
@@ -63,6 +50,24 @@ const SearchComponent = () => {
     } else {
       console.log("damn you got it wrong fam");
     }
+  }, [searchTerm, dispatch, searchType, position, loadedCount, history]);
+
+  useEffect(() => {
+    console.log("here");
+    if (pathname === "/results/") {
+      handleSearch();
+    }
+  }, [pathname, handleSearch]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    let value = e.target.value.trim().toLowerCase();
+    dispatch(updateSearchBar(value));
+  };
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    dispatch(updateSearchBar(""));
   };
 
   let searchProps = {

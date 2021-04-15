@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
+import { useLocation } from "react-router";
 
 import FilterDropDown from "../components/FilterDropDown";
 import {
@@ -49,9 +50,15 @@ const Filters = ({ handleSearch }) => {
   const searchType = useSelector(selectSearchType);
   // const sortBy = useSelector(selectSortBy);
 
+  let { pathname } = useLocation();
+
   const handleChange = (filter, value) => {
     dispatch(setFilters({ filter, value }));
-    handleSearch();
+
+    // if (pathname === "/results/") {
+    //   console.log("here");
+    //   handleSearch();
+    // }
   };
 
   let filters = [
