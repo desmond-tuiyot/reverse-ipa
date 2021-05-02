@@ -40,7 +40,7 @@ const types = [
 //   { name: "frequency", label: "Frequency" },
 // ];
 
-const Filters = ({ handleSearch }) => {
+const Filters = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();

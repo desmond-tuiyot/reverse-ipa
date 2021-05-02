@@ -19,6 +19,17 @@ import {
 //   return new URLSearchParams(useLocation().search);
 // };
 
+const useChangeFilterOption = () => {
+  const dispatch = useDispatch();
+  const searchType = useSelector(selectSearchType);
+  const position = useSelector(selectPosition);
+  const loadedCount = useSelector(selectLoadedCount);
+
+  useEffect(() => {
+    dispatch(fetchResults());
+  }, [searchType, position, loadedCount]);
+};
+
 /**
  * Holds the search bar, the filter, and the IPA keyboard
  */
@@ -28,32 +39,12 @@ const SearchComponent = () => {
   const position = useSelector(selectPosition);
   const loadedCount = useSelector(selectLoadedCount);
 
+  useChangeFilterOption();
+
   const dispatch = useDispatch();
 
   let history = useHistory();
-  let { pathname } = useLocation();
-
-  const handleRefresh = useCallback(() => {
-    if (searchTerm.length > 0) {
-      dispatch(
-        fetchResults({
-          term: searchTerm,
-          type: searchType,
-          position: position,
-          skip: loadedCount,
-        })
-      );
-    }
-    history.push(
-      `/results/?term=${searchTerm}&type=${searchType}&position=${position}`
-    );
-  }, [searchTerm, history, searchType, position, dispatch, loadedCount]);
-
-  useEffect(() => {
-    if (pathname === "/results/") {
-      handleRefresh();
-    }
-  }, [pathname, handleRefresh]);
+  // let { pathname } = useLocation();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -68,14 +59,7 @@ const SearchComponent = () => {
 
   const handleSearch = () => {
     if (searchTerm.length > 0) {
-      dispatch(
-        fetchResults({
-          term: searchTerm,
-          type: searchType,
-          position: position,
-          skip: loadedCount,
-        })
-      );
+      dispatch(fetchResults());
       history.push(
         `/results/?term=${searchTerm}&type=${searchType}&position=${position}`
       );

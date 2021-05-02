@@ -1,13 +1,17 @@
 export const selectStatus = (state) => state.search.status;
 export const selectSearchTerm = (state) => state.search.searchTerm;
 export const selectSearchResults = (state) => {
-  let type = state.search.filters.searchType;
   let results = state.search.searchResults;
 
-  return results.map((result) => ({
-    searchTerm: type === "toIpa" ? result.word : result.ipaTranscription,
-    searchResults: type === "toIpa" ? result.ipaTranscriptions : result.words,
-  }));
+  return results.map((result) => {
+    // does frontend know too much about the backend data?
+    // is it ok for this to be dependent on the shape of the data/
+    const toIpa = result.hasOwnProperty("word");
+    return {
+      searchTerm: toIpa ? result.word : result.ipaTranscription,
+      searchResults: toIpa ? result.ipaTranscriptions : result.words,
+    };
+  });
 };
 export const selectLoadedCount = (state) => state.search.loadedCount;
 

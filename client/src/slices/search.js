@@ -1,10 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import * as api from "../api/index";
+import * as api from "../api";
+import * as selectors from "../selectors";
 
 export const fetchResults = createAsyncThunk(
   "search/fetchResults",
-  async ({ term, type, position }) => {
+  async (_, { getState }) => {
+    const state = getState();
+    const term = selectors.selectSearchTerm(state);
+    const type = selectors.selectSearchType(state);
+    const position = selectors.selectPosition(state);
     const response = await api.fetchResults(term, type, position);
     return response.data;
   }
