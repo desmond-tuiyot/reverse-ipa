@@ -1,0 +1,24 @@
+{
+  "name": "reverse-ipa",
+  "version": "1.0.0",
+  "description": "A tool to search for English words by their IPA transcription.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desmond-tuiyot/reverse-ipa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/desmond-tuiyot/reverse-ipa/issues"
+  },
+  "homepage": "https://github.com/desmond-tuiyot/reverse-ipa#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
+}
