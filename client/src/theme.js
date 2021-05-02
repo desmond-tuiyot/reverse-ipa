@@ -3,7 +3,7 @@ import { unstable_createMuiStrictModeTheme as createMuiTheme } from "@material-u
 
 const theme = createMuiTheme({
   typography: {
-    fontSize: 14,
+    fontSize: 16,
 
     // "@media (min-width: 400px)": {
     //   fontSize: "calc(16px + (24 - 16) * (100vw - 400px) / (960 - 400))",
