@@ -38,9 +38,14 @@ export const slice = createSlice({
       state.status = "idle";
     },
 
-    setFilters: (state, action) => {
+    setFilter: (state, action) => {
       let { filter, value } = action.payload;
       state.filters[filter] = value;
+    },
+
+    setFilters: (state, action) => {
+      console.log(action.payload);
+      state.filters = action.payload;
     },
 
     setLoadedCount: (state, action) => {
@@ -72,6 +77,7 @@ export const slice = createSlice({
 
 export const {
   updateSearchBar,
+  setFilter,
   setFilters,
   setLoadedCount,
   resetState,

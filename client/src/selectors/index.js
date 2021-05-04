@@ -20,3 +20,4 @@ export const selectLanguage = (state) => state.search.filters.language;
 export const selectPosition = (state) => state.search.filters.position;
 export const selectSearchType = (state) => state.search.filters.searchType;
 export const selectSortOption = (state) => state.search.filters.sortOption;
+export const selectFilters = (state) => state.search.filters;

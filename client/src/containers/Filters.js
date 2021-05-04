@@ -2,11 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 
 import FilterDropDown from "../components/FilterDropDown";
-import {
-  setFilters,
-  // selectSortOption,
-} from "../slices/search";
-import { selectLanguage, selectPosition, selectSearchType } from "../selectors";
+import { setFilters } from "../slices/search";
+import { selectFilters } from "../selectors";
 
 const useStyles = makeStyles((theme) => ({
   filterRoot: {
@@ -42,31 +39,32 @@ const types = [
 
 const Filters = () => {
   const classes = useStyles();
-
   const dispatch = useDispatch();
-  const position = useSelector(selectPosition);
-  const language = useSelector(selectLanguage);
-  const searchType = useSelector(selectSearchType);
-  // const sortBy = useSelector(selectSortBy);
+  const filters = useSelector(selectFilters);
 
   const handleChange = (filter, value) => {
-    dispatch(setFilters({ filter, value }));
+    dispatch(
+      setFilters({
+        ...filters,
+        [filter]: value,
+      })
+    );
   };
 
-  let filters = [
+  let filterDetails = [
     {
       filter: "searchType",
-      value: searchType,
+      value: filters.searchType,
       options: types,
     },
     {
       filter: "position",
-      value: position,
+      value: filters.position,
       options: positions,
     },
     {
       filter: "language",
-      value: language,
+      value: filters.language,
       options: languages,
     },
     // {
@@ -78,7 +76,7 @@ const Filters = () => {
 
   return (
     <div className={classes.filterRoot}>
-      {filters.map((filter, index) => (
+      {filterDetails.map((filter, index) => (
         <FilterDropDown key={index} {...filter} handleChange={handleChange} />
       ))}
     </div>
