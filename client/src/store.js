@@ -7,7 +7,7 @@ import { loadState, saveState } from "./utils";
 let preloadedState = loadState();
 
 const store = configureStore({
-  preloadedState,
+  // preloadedState,
   reducer: {
     search: searchReducer,
   },
