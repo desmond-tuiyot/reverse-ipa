@@ -1,8 +1,8 @@
 // import PropTypes from "prop-types";
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useHistory } from "react-router";
 
 import SearchBar from "../components/SearchBar";
 import Filters from "./Filters";
@@ -12,58 +12,21 @@ import {
   fetchResults,
   setFilters,
 } from "../store/slices/search";
-import {
-  selectSearchTerm,
-  selectLoadedCount,
-  selectFilters,
-} from "../store/selectors";
+import { selectSearchTerm, selectFilters } from "../store/selectors";
 
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-};
-
-const useChangeFilterOption = () => {
-  const dispatch = useDispatch();
-  const filters = useSelector(selectFilters);
-
-  useEffect(() => {
-    dispatch(fetchResults());
-  }, [filters]);
-};
-
-const useUrlChange = () => {};
+import { useUrlChange, useFilterSearchResults } from "../hooks";
 
 /**
  * Holds the search bar, the filter, and the IPA keyboard
  */
 const SearchComponent = () => {
+  const dispatch = useDispatch();
+  let history = useHistory();
   const searchTerm = useSelector(selectSearchTerm);
   const { searchType, position } = useSelector(selectFilters);
-  const loadedCount = useSelector(selectLoadedCount);
 
-  useChangeFilterOption(); // updates search results based on filter changes
-  const queryParams = useQuery();
-  let { pathname } = useLocation();
-
-  // useEffect(() => {
-  //   if (pathname === "/results/") {
-  //     const searchType = queryParams.get("type");
-  //     const position = queryParams.get("position");
-  //     const term = queryParams.get("term");
-  //     const filter = {
-  //       searchType,
-  //       position,
-  //     };
-  //     console.log(queryParams);
-  //     dispatch(updateSearchBar(term));
-  //     dispatch(setFilters(filter));
-  //     dispatch(fetchResults());
-  //   }
-  // }, [queryParams]);
-
-  const dispatch = useDispatch();
-
-  let history = useHistory();
+  useUrlChange(updateSearchBar, setFilters);
+  useFilterSearchResults(selectFilters, fetchResults);
 
   const handleChange = (e) => {
     e.preventDefault();

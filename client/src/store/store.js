@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import throttle from "lodash/throttle";
+// import throttle from "lodash/throttle";
 
 import searchReducer from "./slices/search";
-import { loadState, saveState } from "../utils";
+// import {
+//   loadState,
+//   saveState,
+//   saveSearchParams,
+//   loadSearchParams,
+// } from "../utils";
 
-let preloadedState = loadState();
+// let preloadedState = loadSearchParams();
+// console.log(preloadedState);
 
 const store = configureStore({
   // preloadedState,
@@ -13,12 +19,12 @@ const store = configureStore({
   },
 });
 
-store.subscribe(
-  throttle(() => {
-    saveState({
-      search: store.getState().search,
-    });
-  }, 1000)
-);
+// store.subscribe(
+//   throttle(() => {
+//     saveSearchParams({
+//       search: store.getState().search,
+//     });
+//   }, 1000)
+// );
 
 export default store;
