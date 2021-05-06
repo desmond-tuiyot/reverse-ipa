@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import throttle from "lodash/throttle";
 
 import searchReducer from "./slices/search";
-import { loadState, saveState } from "./utils";
+import { loadState, saveState } from "../utils";
 
 let preloadedState = loadState();
 

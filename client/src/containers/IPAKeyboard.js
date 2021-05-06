@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
 import { useDispatch, useSelector } from "react-redux";
 
-import { updateSearchBar } from "../slices/search";
-import { selectSearchTerm } from "../selectors";
+import { updateSearchBar } from "../store/slices/search";
+import { selectSearchTerm } from "../store/selectors";
 import IPASymbolContainer from "../components/IPAKeyboard/IPASymbolContainer";
 import { makeStyles } from "@material-ui/styles";
 import { consonants, vowels } from "../data/ipa";

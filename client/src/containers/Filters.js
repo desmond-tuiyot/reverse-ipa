@@ -2,8 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 
 import FilterDropDown from "../components/FilterDropDown";
-import { setFilters } from "../slices/search";
-import { selectFilters } from "../selectors";
+import { setFilters } from "../store/slices/search";
+import { selectFilters } from "../store/selectors";
 
 const useStyles = makeStyles((theme) => ({
   filterRoot: {

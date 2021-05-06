@@ -7,12 +7,16 @@ import { useHistory, useLocation, useParams } from "react-router";
 import SearchBar from "../components/SearchBar";
 import Filters from "./Filters";
 import IPAKeyboard from "./IPAKeyboard";
-import { updateSearchBar, fetchResults, setFilters } from "../slices/search";
+import {
+  updateSearchBar,
+  fetchResults,
+  setFilters,
+} from "../store/slices/search";
 import {
   selectSearchTerm,
   selectLoadedCount,
   selectFilters,
-} from "../selectors";
+} from "../store/selectors";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -41,21 +45,21 @@ const SearchComponent = () => {
   const queryParams = useQuery();
   let { pathname } = useLocation();
 
-  useEffect(() => {
-    if (pathname === "/results/") {
-      const searchType = queryParams.get("type");
-      const position = queryParams.get("position");
-      const term = queryParams.get("term");
-      const filter = {
-        searchType,
-        position,
-      };
-      console.log(queryParams);
-      dispatch(updateSearchBar(term));
-      dispatch(setFilters(filter));
-      dispatch(fetchResults());
-    }
-  }, [queryParams]);
+  // useEffect(() => {
+  //   if (pathname === "/results/") {
+  //     const searchType = queryParams.get("type");
+  //     const position = queryParams.get("position");
+  //     const term = queryParams.get("term");
+  //     const filter = {
+  //       searchType,
+  //       position,
+  //     };
+  //     console.log(queryParams);
+  //     dispatch(updateSearchBar(term));
+  //     dispatch(setFilters(filter));
+  //     dispatch(fetchResults());
+  //   }
+  // }, [queryParams]);
 
   const dispatch = useDispatch();
 

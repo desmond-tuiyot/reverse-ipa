@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import * as api from "../api";
+import * as api from "../../api";
 import * as selectors from "../selectors";
 
 export const fetchResults = createAsyncThunk(
