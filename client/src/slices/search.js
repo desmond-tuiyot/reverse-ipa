@@ -44,8 +44,7 @@ export const slice = createSlice({
     },
 
     setFilters: (state, action) => {
-      console.log(action.payload);
-      state.filters = action.payload;
+      state.filters = { ...state.filters, ...action.payload };
     },
 
     setLoadedCount: (state, action) => {
