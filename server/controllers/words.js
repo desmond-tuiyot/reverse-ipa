@@ -1,5 +1,6 @@
 import IpaToWord from "../models/ipaToWord.js";
 import WordToIpa from "../models/wordToIpa.js";
+import { fr_QC_WordToIpa } from "../models/french.js";
 
 export const fetchResults = async (req, res) => {
   const { term, type, position } = req.params;
