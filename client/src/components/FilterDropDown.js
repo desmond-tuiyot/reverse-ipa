@@ -25,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 12,
       background: "white",
       borderColor: deepPurple[100],
+      // borderColor: theme.palette.grey[100],
     },
   },
 
   icon: {
     color: deepPurple[300],
+    // color: theme.palette.grey[300],
     right: 12,
     position: "absolute",
     userSelect: "none",
@@ -52,13 +54,16 @@ const useStyles = makeStyles((theme) => ({
     },
     "& li:hover": {
       background: deepPurple[100],
+      // background: theme.palette.grey[100]
     },
     "& li.Mui-selected": {
       color: "white",
       background: deepPurple[400],
+      // background: theme.palette.grey[400]
     },
     "& li.Mui-selected:hover": {
       background: deepPurple[500],
+      // background: theme.palette.grey[400]
     },
   },
 }));

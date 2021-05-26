@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   resultDescription: {
     fontStyle: "italic",
     fontSize: theme.typography.pxToRem(10),
+    color: theme.palette.text.secondary,
     color: "#684C78",
   },
   searchTermDiv: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   searchTerm: {
     fontWeight: "bold",
     fontSize: "1rem",
+    color: theme.palette.text.primary,
     color: "#3D0161",
   },
   searchResultsDiv: {
@@ -30,11 +32,13 @@ const useStyles = makeStyles((theme) => ({
   searchResults: {
     fontStyle: "italic",
     fontSize: theme.typography.pxToRem(12),
+    color: theme.palette.text.primary,
     color: "#3F115A",
   },
 
   chip: {
     marginRight: theme.spacing(1),
+    // color: theme.palette.text.primary,
   },
   resultDiv: {
     display: "flex",

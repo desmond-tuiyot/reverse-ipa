@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   showIpaText: {
     fontSize: "0.9rem",
     textTransform: "capitalize",
-    background: ({ background }) => background,
+    background: ({ showIpa }) => (showIpa ? theme.palette.grey["100"] : "none"),
     padding: theme.spacing(1),
     borderRadius: "10px 10px 0 0",
   },
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   keyboard: {
-    background: "rgba(245,242,247)",
+    background: theme.palette.grey["100"],
     padding: theme.spacing(1),
     borderRadius: "0 10px 10px 10px",
   },
@@ -35,7 +35,7 @@ const IPAKeyboard = () => {
   const dispatch = useDispatch();
 
   const styleProps = {
-    background: showIpa ? "rgba(245,242,247)" : "none",
+    showIpa,
   };
   const classes = useStyles(styleProps);
 
