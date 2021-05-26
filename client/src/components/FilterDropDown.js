@@ -7,9 +7,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { deepPurple } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // paddingRIght: theme.spacing(1),
-  },
   formControl: {
     width: "100%",
   },
@@ -93,7 +90,7 @@ const FilterDropDown = ({ filter, value, handleChange, options }) => {
   const selectedIndex = options.findIndex((option) => option.name === value);
 
   return (
-    <Grid item xs={12} sm={4} className={classes.root}>
+    <Grid item xs={12} sm={4}>
       <FormControl className={classes.formControl}>
         <Select
           disableUnderline
