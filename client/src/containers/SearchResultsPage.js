@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 
 import SearchComponent from "./SearchComponent";
 import SearchResultsCard from "../components/SearchResultsCard";
-import { selectSearchResults } from "../selectors";
+import { selectSearchResults } from "../store/selectors";
 
 const useStyles = makeStyles((theme) => ({
   root: {

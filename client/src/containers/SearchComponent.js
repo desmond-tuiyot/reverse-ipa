@@ -1,18 +1,16 @@
-// import PropTypes from "prop-types";
-import { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useHistory } from "react-router";
 
 import SearchBar from "../components/SearchBar";
 import Filters from "./Filters";
 import IPAKeyboard from "./IPAKeyboard";
-import { updateSearchBar, fetchResults } from "../slices/search";
+import { updateSearchBar, fetchResults } from "../store/slices/search";
 import {
   selectSearchTerm,
   selectLoadedCount,
   selectFilters,
-} from "../selectors";
+} from "../store/selectors";
 import {
   useUpdateSearchOnFilterChange,
   useUpdateSearchOnUrlChange,
@@ -22,18 +20,16 @@ import {
  * Holds the search bar, the filter, and the IPA keyboard
  */
 const SearchComponent = () => {
+  const dispatch = useDispatch();
+  let history = useHistory();
   const searchTerm = useSelector(selectSearchTerm);
   const { searchType, position } = useSelector(selectFilters);
   const loadedCount = useSelector(selectLoadedCount);
-  const dispatch = useDispatch();
 
   useUpdateSearchOnFilterChange(); // updates search results based on filter changes
-
   // allows user to navigate using back and next buttons
   const paramsToWatch = ["type", "position", "term"];
   useUpdateSearchOnUrlChange(paramsToWatch);
-
-  let history = useHistory();
 
   const handleChange = (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectFilters } from "../selectors";
-import { fetchResults } from "../slices/search";
+import { selectFilters } from "../store/selectors";
+import { fetchResults } from "../store/slices/search";
 
 const useUpdateSearchOnFilterChange = () => {
   const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import * as api from "./api/index";
 api.fetchResults().then((data) => {
-  console.log(data);
+  // console.log(data);
 });
 
 ReactDOM.render(

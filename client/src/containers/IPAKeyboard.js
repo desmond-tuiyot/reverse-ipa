@@ -3,12 +3,12 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
+import { makeStyles } from "@material-ui/styles";
 import { useDispatch, useSelector } from "react-redux";
 
-import { updateSearchBar } from "../slices/search";
-import { selectSearchTerm } from "../selectors";
 import IPASymbolContainer from "../components/IPAKeyboard/IPASymbolContainer";
-import { makeStyles } from "@material-ui/styles";
+import { updateSearchBar } from "../store/slices/search";
+import { selectSearchTerm } from "../store/selectors";
 import { consonants, vowels } from "../constants/ipa";
 
 const useStyles = makeStyles((theme) => ({
