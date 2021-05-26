@@ -9,7 +9,7 @@ import { updateSearchBar } from "../slices/search";
 import { selectSearchTerm } from "../selectors";
 import IPASymbolContainer from "../components/IPAKeyboard/IPASymbolContainer";
 import { makeStyles } from "@material-ui/styles";
-import { consonants, vowels } from "../data/ipa";
+import { consonants, vowels } from "../constants/ipa";
 
 const useStyles = makeStyles((theme) => ({
   showIpaText: {

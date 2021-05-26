@@ -21,3 +21,11 @@ export const types = [
 //   { name: "alphabeticalAsc", label: "Alphabetical (Asc)" },
 //   { name: "frequency", label: "Frequency" },
 // ];
+
+const filters = {
+  positions,
+  languages,
+  types,
+};
+
+export default filters;
