@@ -55,7 +55,7 @@ const SearchComponent = () => {
       dispatch(setFilters(filter));
       dispatch(fetchResults());
     }
-  }, [queryParams]);
+  }, []);
 
   const dispatch = useDispatch();
 

@@ -1,3 +1,4 @@
+import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 
@@ -5,7 +6,7 @@ import FilterDropDown from "../components/FilterDropDown";
 import { setFilters } from "../slices/search";
 import { selectFilters } from "../selectors";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   filterRoot: {
     display: "flex",
     width: "100%",
@@ -75,11 +76,11 @@ const Filters = () => {
   ];
 
   return (
-    <div className={classes.filterRoot}>
+    <Grid container justify="center" spacing={2}>
       {filterDetails.map((filter, index) => (
         <FilterDropDown key={index} {...filter} handleChange={handleChange} />
       ))}
-    </div>
+    </Grid>
   );
 };
 

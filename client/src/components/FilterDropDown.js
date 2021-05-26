@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/styles";
+import Grid from "@material-ui/core/Grid";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
@@ -6,6 +7,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { deepPurple } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    // paddingRIght: theme.spacing(1),
+  },
+  formControl: {
+    width: "100%",
+  },
   select: {
     minWidth: 100,
     fontSize: "0.8rem",
@@ -86,25 +93,27 @@ const FilterDropDown = ({ filter, value, handleChange, options }) => {
   const selectedIndex = options.findIndex((option) => option.name === value);
 
   return (
-    <FormControl>
-      <Select
-        disableUnderline
-        classes={{ root: classes.select }}
-        MenuProps={menuProps}
-        IconComponent={iconComponent}
-        value={selectedIndex}
-        onChange={(event) => {
-          let value = options[event.target.value].name;
-          handleChange(filter, value);
-        }}
-      >
-        {options.map((option, index) => (
-          <MenuItem key={index} value={index}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Grid item xs={12} sm={4} className={classes.root}>
+      <FormControl className={classes.formControl}>
+        <Select
+          disableUnderline
+          classes={{ root: classes.select }}
+          MenuProps={menuProps}
+          IconComponent={iconComponent}
+          value={selectedIndex}
+          onChange={(event) => {
+            let value = options[event.target.value].name;
+            handleChange(filter, value);
+          }}
+        >
+          {options.map((option, index) => (
+            <MenuItem key={index} value={index}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Grid>
   );
 };
 
