@@ -22,11 +22,13 @@ import {
 const SearchComponent = () => {
   const dispatch = useDispatch();
   let history = useHistory();
+
   const searchTerm = useSelector(selectSearchTerm);
   const { searchType, position } = useSelector(selectFilters);
   const loadedCount = useSelector(selectLoadedCount);
 
-  useUpdateSearchOnFilterChange(); // updates search results based on filter changes
+  // updates search results based on filter changes
+  useUpdateSearchOnFilterChange();
   // allows user to navigate using back and next buttons
   const paramsToWatch = ["type", "position", "term"];
   useUpdateSearchOnUrlChange(paramsToWatch);

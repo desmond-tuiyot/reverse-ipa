@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../../api";
 import * as selectors from "../selectors";
+import filterOptions from "../../constants/filter-options";
 
 export const fetchResults = createAsyncThunk(
   "search/fetchResults",
@@ -40,6 +41,9 @@ export const slice = createSlice({
 
     setFilter: (state, action) => {
       let { filter, value } = action.payload;
+
+      console.log(filterOptions[filter].map((options) => options.name));
+
       state.filters[filter] = value;
     },
 

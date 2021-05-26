@@ -8,11 +8,22 @@ import {
   fetchResults,
   setFilters,
 } from "../store/slices/search";
+import filterOptions from "../constants/filter-options";
 
 const useUpdateSearchOnUrlChange = (paramsToWatch) => {
-  const [queryType, queryPosition, queryTerm] = useQuery(paramsToWatch);
+  let [queryType, queryPosition, queryTerm] = useQuery(paramsToWatch);
   let { pathname } = useLocation();
   const dispatch = useDispatch();
+
+  const validTypes = filterOptions.types.map((type) => type.name);
+  const validPositions = filterOptions.positions.map(
+    (position) => position.name
+  );
+
+  queryType = validTypes.includes(queryType) ? queryType : "toWord";
+  queryPosition = validPositions.includes(queryPosition)
+    ? queryPosition
+    : "anywhere";
 
   useEffect(() => {
     if (pathname === "/results/") {
