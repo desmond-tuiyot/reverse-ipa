@@ -23,6 +23,7 @@
 /client/yarn-error.log*
 
 /client/src/firebase
+/client/src/data
 
 # server
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -49,5 +50,6 @@
 /server/yarn-debug.log*
 /server/yarn-error.log*
 
-
-node_modules
+/node_modules
+.DS_Store
+/*.env
