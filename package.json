@@ -20,7 +20,8 @@
     "url": "https://github.com/desmond-tuiyot/reverse-ipa/issues"
   },
   "engines": {
-    "node": "14.16.1"
+    "node": "14.16.1",
+    "npm": "6.14.12"
   },
   "homepage": "https://github.com/desmond-tuiyot/reverse-ipa#readme",
   "dependencies": {
