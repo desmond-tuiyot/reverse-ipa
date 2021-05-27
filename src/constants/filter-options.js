@@ -7,7 +7,7 @@ export const positions = [
 
 export const languages = [
   { name: "en_us", label: "English - USA" },
-  { name: "en_uk", label: "English - UK" },
+  // { name: "en_uk", label: "English - UK" },
 ];
 
 export const types = [

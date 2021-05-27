@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 import SearchComponent from "./SearchComponent";
 import { resetState } from "../store/slices/search";
+import Appbar from "../components/Appbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,20 +34,24 @@ const HomePage = () => {
   }, [dispatch]);
 
   return (
-    <Container maxWidth="sm">
-      <Grid
-        container
-        spacing={2}
-        justify="center"
-        alignItems="flex-start"
-        className={classes.root}
-      >
-        <Grid item xs={12}>
-          <Typography className={classes.header}>Reverse IPA</Typography>
+    <>
+      <Container maxWidth="sm">
+        <Appbar />
+        <Grid
+          container
+          spacing={2}
+          justify="center"
+          alignItems="flex-start"
+          className={classes.root}
+        >
+          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+            <Typography className={classes.header}>Reverse IPA</Typography>
+          </Grid>
+          <SearchComponent />
         </Grid>
-        <SearchComponent />
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 

@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useHistory } from "react-router";
 
 import SearchComponent from "./SearchComponent";
 import SearchResultsCard from "../components/SearchResultsCard";
 import { selectSearchResults } from "../store/selectors";
+import Appbar from "../components/Appbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "36px",
     color: theme.palette.primary.dark,
-    textAlign: "center",
+    // textAlign: "center",
   },
   headerDiv: {
     "&:hover": {
@@ -30,19 +32,59 @@ const SearchResultsPage = () => {
   const classes = useStyles();
   let searchResults = useSelector(selectSearchResults);
   let history = useHistory();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  console.log(matches);
 
   const handleClick = () => {
     history.push("/");
   };
 
-  return (
-    <Container maxWidth="sm">
-      <Grid container spacing={3} justify="center" className={classes.root}>
-        <Grid item xs={12}>
+  const order = {
+    underXs: (
+      <>
+        <Grid item xs={12} sm={6}>
+          <Appbar />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <div onClick={handleClick} className={classes.headerDiv}>
-            <Typography className={classes.header}>Reverse IPA</Typography>
+            <Typography align="center" className={classes.header}>
+              Reverse IPA
+            </Typography>
           </div>
         </Grid>
+      </>
+    ),
+    overXs: (
+      <>
+        <Grid item xs={12} sm={6}>
+          <div onClick={handleClick} className={classes.headerDiv}>
+            <Typography align="left" className={classes.header}>
+              Reverse IPA
+            </Typography>
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Appbar />
+        </Grid>
+      </>
+    ),
+  };
+
+  return (
+    <Container maxWidth="sm">
+      <Grid container spacing={3} justify="flex-end" className={classes.root}>
+        {matches ? [order.overXs] : [order.underXs]}
+        {/* <Grid item xs={12} sm={6}>
+          <div onClick={handleClick} className={classes.headerDiv}>
+            <Typography align="left" className={classes.header}>
+              Reverse IPA
+            </Typography>
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Appbar />
+        </Grid> */}
         <SearchComponent />
         <Grid item xs={12}>
           {searchResults &&
