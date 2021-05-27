@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
     "server": "cd server && npm start",
-    "client": "cd client && npm start",
+    "client": "cd client && npm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
