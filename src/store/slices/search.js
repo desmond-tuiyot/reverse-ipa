@@ -11,7 +11,7 @@ export const fetchResults = createAsyncThunk(
     const term = selectors.selectSearchTerm(state);
     const type = selectors.selectSearchType(state);
     const position = selectors.selectPosition(state);
-    const response = await api.fetchResults(term, type, position);
+    const response = await api.fetchResults(term, type, position, 0);
     return response.data;
   }
 );
