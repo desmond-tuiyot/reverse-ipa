@@ -38,9 +38,8 @@ const About = ({ iconClass }) => {
           </DialogContentText>
           <DialogContentText>
             You can use it to look up the IPA transcriptions of words.
-            Alternatively, you can search for words by their IPA transcriptions
-            to find words that contain specific sounds that you want to
-            practice.
+            Alternatively, you search by IPA transcription to find words that
+            contain certain sounds.
           </DialogContentText>
           <DialogContentText>
             If you have any feedback, DM me on twitter (linked above)
