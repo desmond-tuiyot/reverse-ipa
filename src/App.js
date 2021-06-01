@@ -13,11 +13,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
-            <Route path="/results">
-              <SearchResultsPage />
-            </Route>
-            <Route path="/">
+            <Route exact path="/">
               <HomePage />
+            </Route>
+            <Route exact path="/results">
+              <SearchResultsPage />
             </Route>
           </Switch>
         </Router>

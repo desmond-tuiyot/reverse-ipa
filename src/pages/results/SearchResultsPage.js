@@ -17,6 +17,10 @@ import {
 import Appbar from "../../common/Appbar";
 import NoResultsPage from "../../common/NoResultsPage";
 import TopProgressBar from "../../common/TopProgressBar";
+import {
+  useUpdateSearchOnFilterChange,
+  useUpdateSearchOnUrlChange,
+} from "../../hooks";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +55,13 @@ const SearchResultsPage = () => {
   let searchResults = useSelector(selectSearchResults);
   let searchType = useSelector(selectSearchType);
   let delayedSearchTerm = useSelector(selectDelayedSearchTerm);
+
+  // updates search results based on filter changes
+  useUpdateSearchOnFilterChange();
+
+  // allows user to navigate using back and next buttons
+  const paramsToWatch = ["type", "position", "term"];
+  useUpdateSearchOnUrlChange(paramsToWatch);
 
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 

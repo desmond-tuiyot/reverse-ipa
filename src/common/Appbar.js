@@ -16,12 +16,20 @@ const Appbar = () => {
   const classes = useStyles();
   return (
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <a href="https://github.com/desmond-tuiyot/reverse-ipa" target="_blank">
+      <a
+        href="https://github.com/desmond-tuiyot/reverse-ipa"
+        rel="noreferrer"
+        target="_blank"
+      >
         <IconButton className={classes.icon}>
           <GitHubIcon />
         </IconButton>
       </a>
-      <a href="https://twitter.com/desmond_tuiyot" target="_blank">
+      <a
+        href="https://twitter.com/desmond_tuiyot"
+        rel="noreferrer"
+        target="_blank"
+      >
         <IconButton className={classes.icon}>
           <TwitterIcon />
         </IconButton>

@@ -11,10 +11,10 @@ import {
   // selectLoadedCount,
   selectFilters,
 } from "../../store/selectors";
-import {
-  useUpdateSearchOnFilterChange,
-  useUpdateSearchOnUrlChange,
-} from "../../hooks";
+// import {
+//   useUpdateSearchOnFilterChange,
+//   useUpdateSearchOnUrlChange,
+// } from "../../hooks";
 
 /**
  * Holds the search bar, the filter, and the IPA keyboard
@@ -28,11 +28,11 @@ const SearchComponent = () => {
   // const loadedCount = useSelector(selectLoadedCount);
 
   // updates search results based on filter changes
-  useUpdateSearchOnFilterChange();
+  // useUpdateSearchOnFilterChange();
 
   // allows user to navigate using back and next buttons
-  const paramsToWatch = ["type", "position", "term"];
-  useUpdateSearchOnUrlChange(paramsToWatch);
+  // const paramsToWatch = ["type", "position", "term"];
+  // useUpdateSearchOnUrlChange(paramsToWatch);
 
   const handleChange = (e) => {
     e.preventDefault();

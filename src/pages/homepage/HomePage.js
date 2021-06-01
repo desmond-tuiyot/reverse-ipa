@@ -50,7 +50,9 @@ const HomePage = () => {
         >
           <Grid item xs={12}></Grid>
           <Grid item xs={12}>
-            <Typography className={classes.header}>Reverse IPA</Typography>
+            <Typography component="h1" className={classes.header}>
+              Reverse IPA
+            </Typography>
           </Grid>
           <SearchComponent />
         </Grid>
