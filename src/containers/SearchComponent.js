@@ -25,7 +25,7 @@ const SearchComponent = () => {
 
   const searchTerm = useSelector(selectSearchTerm);
   const { searchType, position } = useSelector(selectFilters);
-  const loadedCount = useSelector(selectLoadedCount);
+  // const loadedCount = useSelector(selectLoadedCount);
 
   // updates search results based on filter changes
   useUpdateSearchOnFilterChange();

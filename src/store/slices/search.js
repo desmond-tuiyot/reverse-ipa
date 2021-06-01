@@ -20,6 +20,7 @@ const initialState = {
   status: "idle",
   error: "" || null,
   searchTerm: "",
+  delayedSearchTerm: "",
   searchResults: [],
   loadedCount: 0,
   filters: {
@@ -41,14 +42,14 @@ export const slice = createSlice({
 
     setFilter: (state, action) => {
       let { filter, value } = action.payload;
-
-      console.log(filterOptions[filter].map((options) => options.name));
-
+      // console.log(filterOptions[filter].map((options) => options.name));
       state.filters[filter] = value;
+      state.delayedSearchTerm = state.searchTerm;
     },
 
     setFilters: (state, action) => {
       state.filters = { ...state.filters, ...action.payload };
+      state.delayedSearchTerm = state.searchTerm;
     },
 
     setLoadedCount: (state, action) => {
@@ -70,6 +71,7 @@ export const slice = createSlice({
     [fetchResults.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.searchResults = action.payload;
+      state.delayedSearchTerm = state.searchTerm;
     },
     [fetchResults.rejected]: (state, action) => {
       state.status = "failed";

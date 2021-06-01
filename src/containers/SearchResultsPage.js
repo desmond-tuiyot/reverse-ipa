@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -5,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useHistory } from "react-router";
+import isEmpty from "lodash/isEmpty";
 
 import SearchComponent from "./SearchComponent";
 import SearchResultsCard from "../components/SearchResultsCard";
@@ -12,6 +14,7 @@ import {
   selectSearchResults,
   selectSearchType,
   selectSearchTerm,
+  selectDelayedSearchTerm,
 } from "../store/selectors";
 import Appbar from "../components/Appbar";
 
@@ -46,7 +49,7 @@ const SearchResultsPage = () => {
 
   let searchResults = useSelector(selectSearchResults);
   let searchType = useSelector(selectSearchType);
-  let searchTerm = useSelector(selectSearchTerm);
+  let delayedSearchTerm = useSelector(selectDelayedSearchTerm);
 
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -54,7 +57,6 @@ const SearchResultsPage = () => {
     history.push("/");
   };
 
-  console.log(searchType);
   const searchResultHeader =
     searchType == "toWord"
       ? `Words containing the IPA symbol(s) `
@@ -91,19 +93,19 @@ const SearchResultsPage = () => {
     ),
   };
 
-  // console.log(searchResults);
-
   return (
     <Container maxWidth="sm">
       <Grid container spacing={3} justify="flex-end" className={classes.root}>
         {matches ? [order.overXs] : [order.underXs]}
         <SearchComponent />
-        <Grid item xs={12}>
-          <Typography className={classes.resultDescription}>
-            {searchResultHeader}
-            <span className={classes.searchTerm}>{searchTerm}</span>
-          </Typography>
-        </Grid>
+        {!isEmpty(searchResults) && (
+          <Grid item xs={12}>
+            <Typography className={classes.resultDescription}>
+              {searchResultHeader}
+              <span className={classes.searchTerm}>{delayedSearchTerm}</span>
+            </Typography>
+          </Grid>
+        )}
         <Grid item xs={12}>
           {searchResults &&
             searchResults.map((result, index) => (

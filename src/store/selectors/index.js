@@ -1,5 +1,7 @@
 export const selectStatus = (state) => state.search.status;
 export const selectSearchTerm = (state) => state.search.searchTerm;
+export const selectDelayedSearchTerm = (state) =>
+  state.search.delayedSearchTerm;
 export const selectSearchResults = (state) => {
   let results = state.search.searchResults;
 
