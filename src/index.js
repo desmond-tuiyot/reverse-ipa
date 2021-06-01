@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import App from "./containers/App";
 import reportWebVitals from "./reportWebVitals";
 
-import * as api from "./api/index";
-api.fetchResults().then((data) => {
-  // console.log(data);
-});
+// import * as api from "./api/index";
+// api.fetchResults().then((data) => {
+//   // console.log(data);
+// });
 
 ReactDOM.render(
   <React.StrictMode>
