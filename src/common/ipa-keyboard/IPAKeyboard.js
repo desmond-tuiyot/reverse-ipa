@@ -6,10 +6,10 @@ import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/styles";
 import { useDispatch, useSelector } from "react-redux";
 
-import IPASymbolContainer from "../components/IPAKeyboard/IPASymbolContainer";
-import { updateSearchBar } from "../store/slices/search";
-import { selectSearchTerm } from "../store/selectors";
-import { consonants, vowels } from "../constants/ipa";
+import IPASymbolContainer from "./IPASymbolContainer";
+import { updateSearchBar } from "../../store/slices/search";
+import { selectSearchTerm } from "../../store/selectors";
+import { consonants, vowels } from "../../constants/ipa";
 
 const useStyles = makeStyles((theme) => ({
   showIpaText: {

@@ -25,7 +25,12 @@ const NoResultsPage = () => {
   return (
     <>
       <Grid item xs={12}>
-        <img src={notFound} width="100%" height="auto"></img>
+        <img
+          src={notFound}
+          alt="404 - results not found"
+          width="100%"
+          height="auto"
+        ></img>
       </Grid>
       <Grid item xs={12}>
         <Typography

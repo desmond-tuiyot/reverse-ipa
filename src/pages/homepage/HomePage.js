@@ -5,9 +5,9 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 
-import SearchComponent from "./SearchComponent";
-import Appbar from "../components/Appbar";
-import { resetState } from "../store/slices/search";
+import SearchComponent from "../../common/search/SearchComponent";
+import Appbar from "../../common/Appbar";
+import { resetState } from "../../store/slices/search";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -2,19 +2,19 @@ import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import SearchBar from "../components/SearchBar";
-import Filters from "./Filters";
-import IPAKeyboard from "./IPAKeyboard";
-import { updateSearchBar, fetchResults } from "../store/slices/search";
+import SearchBar from "./SearchBar";
+import Filters from "../filter/Filters";
+import IPAKeyboard from "../ipa-keyboard/IPAKeyboard";
+import { updateSearchBar, fetchResults } from "../../store/slices/search";
 import {
   selectSearchTerm,
-  selectLoadedCount,
+  // selectLoadedCount,
   selectFilters,
-} from "../store/selectors";
+} from "../../store/selectors";
 import {
   useUpdateSearchOnFilterChange,
   useUpdateSearchOnUrlChange,
-} from "../hooks";
+} from "../../hooks";
 
 /**
  * Holds the search bar, the filter, and the IPA keyboard

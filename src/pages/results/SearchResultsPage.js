@@ -7,16 +7,16 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useHistory } from "react-router";
 import isEmpty from "lodash/isEmpty";
 
-import SearchComponent from "./SearchComponent";
-import SearchResultsCard from "../components/SearchResultsCard";
+import SearchComponent from "../../common/search/SearchComponent";
+import SearchResultsCard from "../../common/search/SearchResultsCard";
 import {
   selectSearchResults,
   selectSearchType,
   selectDelayedSearchTerm,
-} from "../store/selectors";
-import Appbar from "../components/Appbar";
-import NoResultsPage from "../components/NoResultsPage";
-import TopProgressBar from "../components/TopProgressBar";
+} from "../../store/selectors";
+import Appbar from "../../common/Appbar";
+import NoResultsPage from "../../common/NoResultsPage";
+import TopProgressBar from "../../common/TopProgressBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
