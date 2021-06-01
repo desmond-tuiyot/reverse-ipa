@@ -13,6 +13,7 @@ import {
   selectSearchResults,
   selectSearchType,
   selectDelayedSearchTerm,
+  selectStatus,
 } from "../../store/selectors";
 import Appbar from "../../common/Appbar";
 import NoResultsPage from "../../common/NoResultsPage";
@@ -55,6 +56,7 @@ const SearchResultsPage = () => {
   let searchResults = useSelector(selectSearchResults);
   let searchType = useSelector(selectSearchType);
   let delayedSearchTerm = useSelector(selectDelayedSearchTerm);
+  let status = useSelector(selectStatus);
 
   // updates search results based on filter changes
   useUpdateSearchOnFilterChange();
@@ -119,9 +121,9 @@ const SearchResultsPage = () => {
                 <span className={classes.searchTerm}>{delayedSearchTerm}</span>
               </Typography>
             </Grid>
-          ) : (
+          ) : status === "success" ? (
             <NoResultsPage />
-          )}
+          ) : null}
           <Grid item xs={12}>
             {searchResults &&
               searchResults.map((result, index) => (
