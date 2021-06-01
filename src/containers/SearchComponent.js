@@ -29,6 +29,7 @@ const SearchComponent = () => {
 
   // updates search results based on filter changes
   useUpdateSearchOnFilterChange();
+
   // allows user to navigate using back and next buttons
   const paramsToWatch = ["type", "position", "term"];
   useUpdateSearchOnUrlChange(paramsToWatch);

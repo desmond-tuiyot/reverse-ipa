@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -13,10 +12,10 @@ import SearchResultsCard from "../components/SearchResultsCard";
 import {
   selectSearchResults,
   selectSearchType,
-  selectSearchTerm,
   selectDelayedSearchTerm,
 } from "../store/selectors";
 import Appbar from "../components/Appbar";
+import NoResultsPage from "../components/NoResultsPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,13 +97,15 @@ const SearchResultsPage = () => {
       <Grid container spacing={3} justify="flex-end" className={classes.root}>
         {matches ? [order.overXs] : [order.underXs]}
         <SearchComponent />
-        {!isEmpty(searchResults) && (
+        {!isEmpty(searchResults) ? (
           <Grid item xs={12}>
             <Typography className={classes.resultDescription}>
               {searchResultHeader}
               <span className={classes.searchTerm}>{delayedSearchTerm}</span>
             </Typography>
           </Grid>
+        ) : (
+          <NoResultsPage />
         )}
         <Grid item xs={12}>
           {searchResults &&

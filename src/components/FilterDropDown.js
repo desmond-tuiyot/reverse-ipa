@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   select: {
     minWidth: 100,
-    fontSize: "0.8rem",
+    fontSize: "0.9rem",
     background: "white",
     color: deepPurple[500],
     fontWeight: 400,
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 0,
     "& li": {
       fontWeight: 400,
-      fontSize: "0.75rem",
+      fontSize: "0.8rem",
       padding: theme.spacing(1.3, 2),
     },
     "& li:hover": {
