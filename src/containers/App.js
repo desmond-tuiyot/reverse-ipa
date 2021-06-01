@@ -6,12 +6,12 @@ import theme from "../theme";
 import store from "../store";
 import HomePage from "./HomePage";
 import SearchResultsPage from "./SearchResultsPage";
-import TopProgressBar from "../components/TopProgressBar";
+// import TopProgressBar from "../components/TopProgressBar";
 
 function App() {
   return (
     <Provider store={store}>
-      <TopProgressBar />
+      {/* <TopProgressBar /> */}
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>

@@ -16,6 +16,7 @@ import {
 } from "../store/selectors";
 import Appbar from "../components/Appbar";
 import NoResultsPage from "../components/NoResultsPage";
+import TopProgressBar from "../components/TopProgressBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,32 +95,35 @@ const SearchResultsPage = () => {
   };
 
   return (
-    <Container maxWidth="sm" className={classes.root}>
-      <Grid container spacing={3} justify="flex-end">
-        {matches ? [order.overXs] : [order.underXs]}
-        <SearchComponent />
-        {!isEmpty(searchResults) ? (
+    <>
+      <TopProgressBar />
+      <Container maxWidth="sm" className={classes.root}>
+        <Grid container spacing={3} justify="flex-end">
+          {matches ? [order.overXs] : [order.underXs]}
+          <SearchComponent />
+          {!isEmpty(searchResults) ? (
+            <Grid item xs={12}>
+              <Typography className={classes.resultDescription}>
+                {searchResultHeader}
+                <span className={classes.searchTerm}>{delayedSearchTerm}</span>
+              </Typography>
+            </Grid>
+          ) : (
+            <NoResultsPage />
+          )}
           <Grid item xs={12}>
-            <Typography className={classes.resultDescription}>
-              {searchResultHeader}
-              <span className={classes.searchTerm}>{delayedSearchTerm}</span>
-            </Typography>
+            {searchResults &&
+              searchResults.map((result, index) => (
+                <SearchResultsCard
+                  key={index}
+                  {...result}
+                  header={searchResultHeader}
+                />
+              ))}
           </Grid>
-        ) : (
-          <NoResultsPage />
-        )}
-        <Grid item xs={12}>
-          {searchResults &&
-            searchResults.map((result, index) => (
-              <SearchResultsCard
-                key={index}
-                {...result}
-                header={searchResultHeader}
-              />
-            ))}
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 };
 
