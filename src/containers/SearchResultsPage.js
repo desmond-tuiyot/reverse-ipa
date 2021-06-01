@@ -59,7 +59,7 @@ const SearchResultsPage = () => {
   };
 
   const searchResultHeader =
-    searchType == "toWord"
+    searchType === "toWord"
       ? `Words containing the IPA symbol(s) `
       : `IPA transcription(s) for `;
 
