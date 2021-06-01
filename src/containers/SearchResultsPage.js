@@ -19,7 +19,8 @@ import NoResultsPage from "../components/NoResultsPage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "2vh",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   header: {
     fontWeight: "bold",
@@ -93,8 +94,8 @@ const SearchResultsPage = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Grid container spacing={3} justify="flex-end" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
+      <Grid container spacing={3} justify="flex-end">
         {matches ? [order.overXs] : [order.underXs]}
         <SearchComponent />
         {!isEmpty(searchResults) ? (

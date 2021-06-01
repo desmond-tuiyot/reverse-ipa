@@ -12,6 +12,10 @@ import Appbar from "../components/Appbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "20vh",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "10vh",
+    },
+    marginBottom: theme.spacing(2),
   },
   header: {
     fontWeight: "bold",
