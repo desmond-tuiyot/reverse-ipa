@@ -6,15 +6,7 @@ import SearchBar from "./SearchBar";
 import Filters from "../filter/Filters";
 import IPAKeyboard from "../ipa-keyboard/IPAKeyboard";
 import { updateSearchBar, fetchResults } from "../../store/slices/search";
-import {
-  selectSearchTerm,
-  // selectLoadedCount,
-  selectFilters,
-} from "../../store/selectors";
-// import {
-//   useUpdateSearchOnFilterChange,
-//   useUpdateSearchOnUrlChange,
-// } from "../../hooks";
+import { selectSearchTerm, selectFilters } from "../../store/selectors";
 
 /**
  * Holds the search bar, the filter, and the IPA keyboard
@@ -25,14 +17,6 @@ const SearchComponent = () => {
 
   const searchTerm = useSelector(selectSearchTerm);
   const { searchType, position } = useSelector(selectFilters);
-  // const loadedCount = useSelector(selectLoadedCount);
-
-  // updates search results based on filter changes
-  // useUpdateSearchOnFilterChange();
-
-  // allows user to navigate using back and next buttons
-  // const paramsToWatch = ["type", "position", "term"];
-  // useUpdateSearchOnUrlChange(paramsToWatch);
 
   const handleChange = (e) => {
     e.preventDefault();
