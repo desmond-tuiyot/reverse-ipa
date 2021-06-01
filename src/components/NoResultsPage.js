@@ -6,6 +6,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import notFound from "../assets/404.png";
 
 const useStyles = makeStyles((theme) => ({
+  header: {
+    fontWeight: "500",
+    [theme.breakpoints.up("xs")]: {
+      fontSize: "1.75rem",
+    },
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "2.125rem",
+    },
+  },
   text: {
     color: theme.palette.purples.superDark,
   },
@@ -19,7 +28,11 @@ const NoResultsPage = () => {
         <img src={notFound} width="100%" height="auto"></img>
       </Grid>
       <Grid item xs={12}>
-        <Typography align="center" variant="h4" className={classes.text}>
+        <Typography
+          align="center"
+          variant="h4"
+          className={`${classes.header} ${classes.text}`}
+        >
           No Results Found
         </Typography>
       </Grid>

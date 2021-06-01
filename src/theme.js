@@ -10,7 +10,6 @@ const theme = createMuiTheme({
       main: "#8300D1",
     },
     purples: {
-      superDark: "#716A75",
       superDark: "#67577F",
     },
   },
