@@ -17,12 +17,7 @@ function App() {
             <Route path="/results">
               <SearchResultsPage />
             </Route>
-            <Route
-              path="/"
-              onEnter={() => {
-                console.log("hje");
-              }}
-            >
+            <Route path="/">
               <HomePage />
             </Route>
           </Switch>

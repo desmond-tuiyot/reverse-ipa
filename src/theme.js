@@ -16,7 +16,9 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#8300D1",
-      // main: "#303030",
+    },
+    purples: {
+      superDark: "#716A75",
     },
   },
 });

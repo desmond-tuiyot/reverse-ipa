@@ -8,7 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-const About = () => {
+const About = ({ iconClass }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -21,7 +21,7 @@ const About = () => {
 
   return (
     <>
-      <IconButton onClick={handleOpen}>
+      <IconButton onClick={handleOpen} className={iconClass}>
         <InfoIcon />
       </IconButton>
       <Dialog
