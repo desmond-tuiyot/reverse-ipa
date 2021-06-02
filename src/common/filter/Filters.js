@@ -2,9 +2,9 @@ import Grid from "@material-ui/core/Grid";
 import { useSelector, useDispatch } from "react-redux";
 
 import FilterDropDown from "./FilterDropDown";
-import { setFilters } from "../../store/slices/search";
-import { selectFilters } from "../../store/selectors";
-import filterOptions from "../../constants/filter-options";
+import { setFilters } from "store/slices/search";
+import { selectFilters } from "store/selectors";
+import filterOptions from "constants/filter-options";
 
 const Filters = () => {
   const dispatch = useDispatch();

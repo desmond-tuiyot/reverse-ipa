@@ -3,12 +3,8 @@ import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 
 import useQuery from "./useQuery";
-import {
-  updateSearchBar,
-  fetchResults,
-  setFilters,
-} from "../store/slices/search";
-import filterOptions from "../constants/filter-options";
+import { updateSearchBar, fetchResults, setFilters } from "store/slices/search";
+import filterOptions from "constants/filter-options";
 
 const useUpdateSearchOnUrlChange = (paramsToWatch) => {
   let [queryType, queryPosition, queryTerm] = useQuery(paramsToWatch);

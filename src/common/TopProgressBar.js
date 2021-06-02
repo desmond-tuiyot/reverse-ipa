@@ -2,7 +2,7 @@ import React from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { useSelector } from "react-redux";
 
-import { selectStatus } from "../store/selectors";
+import { selectStatus } from "store/selectors";
 
 const TopProgressBar = () => {
   const status = useSelector(selectStatus);

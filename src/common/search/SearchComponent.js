@@ -5,8 +5,8 @@ import { useHistory } from "react-router";
 import SearchBar from "./SearchBar";
 import Filters from "../filter/Filters";
 import IPAKeyboard from "../ipa-keyboard/IPAKeyboard";
-import { updateSearchBar, fetchResults } from "../../store/slices/search";
-import { selectSearchTerm, selectFilters } from "../../store/selectors";
+import { updateSearchBar, fetchResults } from "store/slices/search";
+import { selectSearchTerm, selectFilters } from "store/selectors";
 
 /**
  * Holds the search bar, the filter, and the IPA keyboard

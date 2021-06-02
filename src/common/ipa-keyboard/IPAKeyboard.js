@@ -1,15 +1,14 @@
 import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import IPASymbolContainer from "./IPASymbolContainer";
-import { updateSearchBar } from "../../store/slices/search";
-import { selectSearchTerm } from "../../store/selectors";
-import { consonants, vowels } from "../../constants/ipa";
+import { updateSearchBar } from "store/slices/search";
+import { selectSearchTerm } from "store/selectors";
+import { consonants, vowels } from "constants/ipa";
 
 const useStyles = makeStyles((theme) => ({
   showIpaText: {
@@ -20,7 +19,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px 10px 0 0",
   },
   showIpaButton: {
-    padding: 0,
+    color: theme.palette.primary.main,
+    fontSize: "0.9rem",
+    textTransform: "capitalize",
+    background: ({ showIpa }) => (showIpa ? theme.palette.grey["100"] : "none"),
+    padding: theme.spacing(1),
+    borderRadius: "10px 10px 0 0",
+    fontWeight: 400,
   },
   keyboard: {
     background: theme.palette.grey["100"],
@@ -50,10 +55,13 @@ const IPAKeyboard = () => {
   return (
     <Grid container justify="center">
       <Grid item xs={12}>
-        <Button onClick={handleShowIpa} className={classes.showIpaButton}>
-          <Typography color="primary" className={classes.showIpaText}>
-            {showIpa ? "Hide IPA Keyboard" : "Show IPA Keyboard"}
-          </Typography>
+        <Button
+          onClick={handleShowIpa}
+          className={classes.showIpaButton}
+          disableFocusRipple={true}
+          disableRipple={true}
+        >
+          {showIpa ? "Hide IPA Keyboard" : "Show IPA Keyboard"}
         </Button>
       </Grid>
       <Collapse in={showIpa}>
