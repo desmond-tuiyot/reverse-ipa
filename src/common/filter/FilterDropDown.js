@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { deepPurple } from "@material-ui/core/colors";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -88,10 +89,14 @@ const FilterDropDown = ({ filter, value, handleChange, options }) => {
 
   const selectedIndex = options.findIndex((option) => option.name === value);
 
+  // console.log(filter);
   return (
     <Grid item xs={12} sm={4}>
       <FormControl className={classes.formControl}>
+        <InputLabel id={`${filter}-label`}></InputLabel>
         <Select
+          labelId={`${filter}-label`}
+          id={filter}
           disableUnderline
           classes={{ root: classes.select }}
           MenuProps={menuProps}
