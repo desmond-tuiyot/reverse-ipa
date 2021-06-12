@@ -1,92 +1,28 @@
 import { rest } from "msw";
 
-const testToIpa = [
-  {
-    searchTerm: "advantest",
-    searchResults: ["/ædˈvæntəst/"],
-  },
-  {
-    searchTerm: "attests",
-    searchResults: ["/əˈtɛs/", "/əˈtɛsts/"],
-  },
-  {
-    searchTerm: "attest",
-    searchResults: ["/əˈtɛst/"],
-  },
-  {
-    searchTerm: "attested",
-    searchResults: ["/əˈtɛstɪd/"],
-  },
-  {
-    searchTerm: "attesting",
-    searchResults: ["/əˈtɛstɪŋ/"],
-  },
-  {
-    searchTerm: "bluntest",
-    searchResults: ["/ˈbɫəntəst/"],
-  },
-];
-
-const testToWord = [
-  {
-    searchTerm: "/əˈtɛstɪd/",
-    searchResults: ["attested"],
-  },
-  {
-    searchTerm: "/əˈtɛstɪŋ/",
-    searchResults: ["attesting"],
-  },
-  {
-    searchTerm: "/əˈtɛst/",
-    searchResults: ["attest"],
-  },
-  {
-    searchTerm: "/əˈtɛsts/",
-    searchResults: ["attests"],
-  },
-  {
-    searchTerm: "/ˈbədˈtɛst/",
-    searchResults: ["bud-test"],
-  },
-  {
-    searchTerm: "/kənˈtɛstənt/",
-    searchResults: ["contestant"],
-  },
-  {
-    searchTerm: "/ˈkɑntɛst/",
-    searchResults: ["contest"],
-  },
-  {
-    searchTerm: "/ˈkɑntɛsts/",
-    searchResults: ["contest's", "contests"],
-  },
-  {
-    searchTerm: "/kənˈtɛstənts/",
-    searchResults: ["contestants"],
-  },
-];
+import { toIpaTestData, toWordTestData } from "constants/test-data";
 
 export const handlers = [
   rest.get(
-    "http://localhost:5000/words/test/toIpa/anywhere",
+    "http://localhost/words/test/toIpa/anywhere/0/40",
     (req, res, ctx) => {
-      return res(ctx.json(testToIpa));
+      return res(ctx.json(toIpaTestData));
     }
   ),
   rest.get(
-    "http://localhost:5000/words/tɛst/toWord/anywhere",
+    "http://localhost/words/tɛst/toWord/anywhere/0/40",
     (req, res, ctx) => {
-      return res(ctx.json(testToWord));
+      return res(ctx.json(toWordTestData));
     }
   ),
   rest.get(
-    "http://localhost:5000/words/nonexistentword/toIpa/anywhere",
+    "http://localhost/words/nonexistentword/toIpa/anywhere/0/40",
     (req, res, ctx) => {
       return res(ctx.json([]));
     }
   ),
   rest.get(
-    "http://localhost:5000/words/nonexistentipa/toWord/anywhere",
+    "http://localhost/words/nonexistentipa/toWord/anywhere/0/40",
     (req, res, ctx) => {
       return res(ctx.json([]));
     }
