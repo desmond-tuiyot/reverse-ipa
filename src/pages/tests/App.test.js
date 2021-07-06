@@ -9,7 +9,7 @@ import { toIpaTestData, toWordTestData } from "test/data/test-data";
 import { Route } from "react-router-dom";
 
 import HomePage from "../homepage";
-import SearchResultsPage from "../results";
+import Search from "../search";
 
 test("searching for ipa transcription on homepage renders list of words that match that ipa transcription", async () => {
   render(
@@ -18,7 +18,7 @@ test("searching for ipa transcription on homepage renders list of words that mat
         <HomePage />
       </Route>
       <Route exact path="/results">
-        <SearchResultsPage />
+        <Search />
       </Route>
     </>
   );
@@ -51,7 +51,7 @@ test("searching for word on homepage renders list of ipa transcriptions for that
         <HomePage />
       </Route>
       <Route exact path="/results">
-        <SearchResultsPage />
+        <Search />
       </Route>
     </>
   );
