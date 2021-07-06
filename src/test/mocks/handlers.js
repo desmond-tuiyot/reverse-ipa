@@ -6,9 +6,14 @@ const url = "http://localhost:5000/api/v1/search";
 
 export const handlers = [
   rest.get(url, (req, res, ctx) => {
-    // console.log(url);
-    // console.log(res);
-    return res(ctx.json(toIpaTestData));
+    const type = req.url.searchParams.get("type");
+    let result;
+    if (type === "toIpa") {
+      result = ctx.json(toIpaTestData);
+    } else {
+      result = ctx.json(toWordTestData);
+    }
+    return res(result);
   }),
   rest.get(
     "http://localhost/words/tɛst/toWord/anywhere/0/40",

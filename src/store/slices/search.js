@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as api from "../../api";
 import * as selectors from "../selectors";
-import filterOptions from "../../constants/filter-options";
+// import filterOptions from "../../constants/filter-options";
 
 export const fetchResults = createAsyncThunk(
   "search/fetchResults",

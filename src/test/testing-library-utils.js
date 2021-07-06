@@ -2,15 +2,15 @@ import { render } from "@testing-library/react";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import store from "../store";
 import theme from "../theme";
 
-const AllTheProviders = ({ children }) => {
+const AllTheProviders = ({ children, initialEntries = ["/"] }) => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Router>{children}</Router>
+        <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
       </ThemeProvider>
     </Provider>
   );
