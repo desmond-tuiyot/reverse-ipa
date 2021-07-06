@@ -57,6 +57,7 @@ const SearchResultsPage = () => {
   let searchType = useSelector(selectSearchType);
   let delayedSearchTerm = useSelector(selectDelayedSearchTerm);
   let status = useSelector(selectStatus);
+  // console.log(status);
 
   // updates search results based on filter changes
   useUpdateSearchOnFilterChange();
@@ -112,7 +113,7 @@ const SearchResultsPage = () => {
       <TopProgressBar />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container spacing={3} justify="flex-end">
-          {matches ? [order.overXs] : [order.underXs]}
+          {matches ? order.overXs : order.underXs}
           <SearchComponent />
           {!isEmpty(searchResults) ? (
             <Grid item xs={12}>

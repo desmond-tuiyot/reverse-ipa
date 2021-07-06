@@ -92,8 +92,24 @@ const FilterDropDown = ({ filter, value, handleChange, options }) => {
   // console.log(filter);
   return (
     <Grid item xs={12} sm={4}>
-      <FormControl className={classes.formControl}>
-        <InputLabel id={`${filter}-label`}></InputLabel>
+      <FormControl
+        className={classes.formControl}
+        // onClick={() => {
+        //   console.log("form");
+        // }}
+        // onMouseDown={() => {
+        //   console.log("form keydown");
+        // }}
+      >
+        <InputLabel
+          id={`${filter}-label`}
+          // onClick={() => {
+          //   console.log("input label");
+          // }}
+          // onMouseDown={() => {
+          //   console.log("input label keydown");
+          // }}
+        ></InputLabel>
         <Select
           labelId={`${filter}-label`}
           id={filter}
@@ -106,6 +122,12 @@ const FilterDropDown = ({ filter, value, handleChange, options }) => {
             let value = options[event.target.value].name;
             handleChange(filter, value);
           }}
+          // onMouseDown={() => {
+          //   console.log("select keydown");
+          // }}
+          // onClick={() => {
+          //   console.log("select");
+          // }}
         >
           {options.map((option, index) => (
             <MenuItem key={index} value={index}>
