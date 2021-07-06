@@ -3,6 +3,7 @@ import {
   render,
   screen,
   waitForElementToBeRemoved,
+  mouseDownEvent,
 } from "test/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 import { toIpaTestData, toWordTestData } from "test/data/test-data";
@@ -66,10 +67,7 @@ test("searching for word on homepage renders list of ipa transcriptions for that
   // 2. change the filter to 'Ipa to Word'
   // grab and click the type filter
   const typeFilter = screen.getByRole("button", { name: /ipa to word/i });
-
-  fireEvent.mouseMove(typeFilter);
-  fireEvent.mouseOver(typeFilter);
-  fireEvent.mouseDown(typeFilter);
+  mouseDownEvent(typeFilter);
 
   // select the `word to ipa` option
   userEvent.click(screen.getByRole("option", { name: /word to ipa/i }));

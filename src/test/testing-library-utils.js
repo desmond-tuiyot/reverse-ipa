@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
@@ -16,22 +16,17 @@ const AllTheProviders = ({ children, initialEntries = ["/"] }) => {
   );
 };
 
-const AllTheProvidersMinusRoute = ({ children }) => {
-  return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </Provider>
-  );
-};
-
 const renderWithProviders = (ui, options) =>
   render(ui, { wrapper: AllTheProviders, ...options });
 
-const renderWithOutRoute = (ui, options) =>
-  render(ui, { wrapper: AllTheProvidersMinusRoute, ...options });
+const mouseDownEvent = (node) => {
+  fireEvent.mouseMove(node);
+  fireEvent.mouseOver(node);
+  fireEvent.mouseDown(node);
+};
 
 // re-export everything
 export * from "@testing-library/react";
 
 // override render method
-export { renderWithProviders as render, renderWithOutRoute as renderNoRoute };
+export { renderWithProviders as render, mouseDownEvent };
