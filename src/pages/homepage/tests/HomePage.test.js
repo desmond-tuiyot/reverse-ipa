@@ -3,15 +3,13 @@ import userEvent from "@testing-library/user-event";
 import {
   render,
   screen,
-  waitFor,
   fireEvent,
   waitForElementToBeRemoved,
   renderNoRoute,
-} from "test-utils/testing-library-utils";
+} from "test/testing-library-utils";
 import HomePage from "..";
 import { consonants, vowels } from "constants/ipa";
-import { toIpaTestData, toWordTestData } from "constants/test-data";
-import { render as tlrender } from "@testing-library/react";
+import { toIpaTestData, toWordTestData } from "test/data/test-data";
 import { MemoryRouter, Route } from "react-router-dom";
 import SearchResultsPage from "../../results";
 

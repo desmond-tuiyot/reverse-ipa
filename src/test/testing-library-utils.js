@@ -2,9 +2,9 @@ import { render } from "@testing-library/react";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
-import theme from "../theme";
+import { BrowserRouter as Router } from "react-router-dom";
 import store from "../store";
+import theme from "../theme";
 
 const AllTheProviders = ({ children }) => {
   return (

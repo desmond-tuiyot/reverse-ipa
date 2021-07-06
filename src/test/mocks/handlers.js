@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-import { toIpaTestData, toWordTestData } from "constants/test-data";
+import { toIpaTestData, toWordTestData } from "test/data/test-data";
 
 const url = "http://localhost:5000/api/v1/search";
 

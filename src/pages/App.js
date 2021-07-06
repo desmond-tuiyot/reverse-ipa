@@ -2,10 +2,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import theme from "./theme";
-import store from "./store";
-import HomePage from "./pages/homepage";
-import SearchResultsPage from "./pages/results";
+import theme from "../theme";
+import store from "../store";
+import HomePage from "./homepage";
+import SearchResultsPage from "./results";
 
 function App() {
   return (
