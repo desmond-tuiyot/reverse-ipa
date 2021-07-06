@@ -31,9 +31,7 @@ const IPASymbolContainer = ({ title, symbols, handleClick }) => {
         </Grid>
         <Grid container item xs={12}>
           {symbols.map((symbol, index) => (
-            <Grid item key={index}>
-              <IPASymbol symbol={symbol} handleClick={handleClick} />
-            </Grid>
+            <IPASymbol key={index} symbol={symbol} handleClick={handleClick} />
           ))}
         </Grid>
       </Container>

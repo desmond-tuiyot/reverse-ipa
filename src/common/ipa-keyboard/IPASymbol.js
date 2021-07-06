@@ -1,6 +1,5 @@
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   symbolContainer: {
@@ -29,18 +28,17 @@ const IPASymbol = ({ symbol, handleClick }) => {
   const classes = useStyles();
 
   return (
-    <>
-      <Paper
-        className={classes.symbolContainer}
-        elevation={0}
-        square
-        onClick={() => {
-          handleClick(symbol);
-        }}
-      >
-        <Typography className={classes.symbol}>{symbol}</Typography>
-      </Paper>
-    </>
+    <Grid
+      item
+      className={classes.symbolContainer}
+      role="button"
+      onClick={() => {
+        handleClick(symbol);
+      }}
+    >
+      {/* <div role="button">{symbol}</div> */}
+      <Typography className={classes.symbol}>{symbol}</Typography>
+    </Grid>
   );
 };
 
