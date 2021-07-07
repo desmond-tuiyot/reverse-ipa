@@ -13,6 +13,8 @@ import NoResultsPage from "common/NoResultsPage";
 import TopProgressBar from "common/TopProgressBar";
 import { filterDetails, initialFilterValues } from "constants/filter-options";
 import { consonants, vowels } from "constants/ipa";
+import useSearch from "hooks/useSearch";
+import useFetchData from "hooks/useFetchData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +55,15 @@ const formatResults = (results) => {
 
 const Search = () => {
   const classes = useStyles();
+  const {
+    query,
+    filters,
+    handleChange,
+    handleClear,
+    handleVirtualKeyboardClick,
+    handleFilterChange,
+    handleSearch,
+  } = useSearch();
 
   let history = useHistory();
 
@@ -63,75 +74,10 @@ const Search = () => {
     history.push("/");
   };
 
-  // Search States and Methods
-  const [query, setQuery] = React.useState("");
-  const [filters, setFilters] = React.useState(initialFilterValues);
-
-  const { type, position } = filters;
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    let value = e.target.value.trim().toLowerCase();
-    setQuery(value);
-  };
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    setQuery("");
-  };
-
-  const handleVirtualKeyboardClick = (symbol) => {
-    setQuery((searchTerm) => searchTerm + symbol);
-  };
-
-  const handleFilterChange = (filter, value) => {
-    setFilters((filters) => ({ ...filters, [filter]: value }));
-  };
-
-  const handleSearch = () => {
-    history.push(`/search/?query=${query}&type=${type}&position=${position}`);
-  };
-
-  // data fetching logic
-
-  const [data, setData] = React.useState([]);
-  const [status, setStatus] = React.useState("idle"); // idle | loading | success | error
-  const [error, setError] = React.useState();
-
-  const { pathname, search } = useLocation();
-  // console.log(pathname, search);
-
-  React.useEffect(() => {
-    (async () => {
-      try {
-        setStatus("loading");
-        const res = await window.fetch(
-          `http://localhost:5000/api/v1/search${search}&skip=0`,
-          {
-            method: "GET",
-          }
-        );
-
-        if (!res.ok) {
-          throw new Error("Network error");
-        }
-
-        const data = await res.json();
-        setData(data);
-        setStatus("success");
-      } catch (err) {
-        setStatus("error");
-        setError(err.message);
-      }
-    })();
-  }, [pathname, search]);
-
-  const isLoading = status === "loading";
-  const isError = status === "error";
-  const isEmpty = status === "success" && data.length === 0;
+  const { data, isLoading, isError, isEmpty } = useFetchData();
 
   const searchResultHeader =
-    type === "toWord"
+    filters.type === "toWord"
       ? `Words containing the IPA symbol(s) `
       : `IPA transcription(s) for `;
 

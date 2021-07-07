@@ -10,6 +10,7 @@ import VirtualKeyboard from "common/ipa-keyboard/VirtualKeyboard";
 import KeyboardSection from "common/ipa-keyboard/KeyboardSection";
 import { consonants, vowels } from "constants/ipa";
 import { filterDetails, initialFilterValues } from "constants/filter-options";
+import useSearch from "hooks/useSearch";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,35 +34,16 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = () => {
   const classes = useStyles();
-  let history = useHistory();
 
-  const [query, setQuery] = React.useState("");
-  const [filters, setFilters] = React.useState(initialFilterValues);
-
-  const { type, position } = filters;
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    let value = e.target.value.trim().toLowerCase();
-    setQuery(value);
-  };
-
-  const handleClear = (e) => {
-    e.preventDefault();
-    setQuery("");
-  };
-
-  const handleSearch = () => {
-    history.push(`/search/?query=${query}&type=${type}&position=${position}`);
-  };
-
-  const handleVirtualKeyboardClick = (symbol) => {
-    setQuery((searchTerm) => searchTerm + symbol);
-  };
-
-  const handleFilterChange = (filter, value) => {
-    setFilters((filters) => ({ ...filters, [filter]: value }));
-  };
+  const {
+    query,
+    filters,
+    handleChange,
+    handleClear,
+    handleVirtualKeyboardClick,
+    handleFilterChange,
+    handleSearch,
+  } = useSearch();
 
   return (
     <>
