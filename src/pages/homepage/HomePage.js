@@ -1,13 +1,15 @@
-import { useEffect } from "react";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import * as React from "react";
+import { Typography, Grid, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
-import SearchComponent from "common/search/SearchComponent";
 import Appbar from "common/Appbar";
-import { resetState } from "store/slices/search";
+import SearchBar from "common/search/SearchBar";
+import SearchFilters from "common/filter/SearchFilters";
+import VirtualKeyboard from "common/ipa-keyboard/VirtualKeyboard";
+import KeyboardSection from "common/ipa-keyboard/KeyboardSection";
+import { consonants, vowels } from "constants/ipa";
+import { filterDetails, initialFilterValues } from "constants/filter-options";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,11 +33,35 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  let history = useHistory();
 
-  useEffect(() => {
-    dispatch(resetState());
-  }, [dispatch]);
+  const [query, setQuery] = React.useState("");
+  const [filters, setFilters] = React.useState(initialFilterValues);
+
+  const { type, position } = filters;
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    let value = e.target.value.trim().toLowerCase();
+    setQuery(value);
+  };
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    setQuery("");
+  };
+
+  const handleSearch = () => {
+    history.push(`/search/?query=${query}&type=${type}&position=${position}`);
+  };
+
+  const handleVirtualKeyboardClick = (symbol) => {
+    setQuery((searchTerm) => searchTerm + symbol);
+  };
+
+  const handleFilterChange = (filter, value) => {
+    setFilters((filters) => ({ ...filters, [filter]: value }));
+  };
 
   return (
     <>
@@ -48,13 +74,34 @@ const HomePage = () => {
           alignItems="flex-start"
           className={classes.root}
         >
-          <Grid item xs={12}></Grid>
           <Grid item xs={12}>
             <Typography component="h1" className={classes.header}>
               Reverse IPA
             </Typography>
           </Grid>
-          <SearchComponent />
+          <SearchBar
+            searchTerm={query}
+            handleSearch={handleSearch}
+            handleClear={handleClear}
+            handleChange={handleChange}
+          />
+          <VirtualKeyboard>
+            <KeyboardSection
+              handleClick={handleVirtualKeyboardClick}
+              title="consonants"
+              symbols={consonants}
+            />
+            <KeyboardSection
+              handleClick={handleVirtualKeyboardClick}
+              title="vowels"
+              symbols={vowels}
+            />
+          </VirtualKeyboard>
+          <SearchFilters
+            filters={filters}
+            filterDetails={filterDetails}
+            handleChange={handleFilterChange}
+          />
         </Grid>
       </Container>
     </>

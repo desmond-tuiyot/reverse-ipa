@@ -1,18 +1,14 @@
 import { render, fireEvent } from "@testing-library/react";
 
 import { ThemeProvider } from "@material-ui/core/styles";
-import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import store from "../store";
 import theme from "../theme";
 
 const AllTheProviders = ({ children, initialEntries = ["/"] }) => {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
+    </ThemeProvider>
   );
 };
 

@@ -3,12 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/styles";
-import { useDispatch, useSelector } from "react-redux";
-
-import IPASymbolContainer from "./IPASymbolContainer";
-import { updateSearchBar } from "store/slices/search";
-import { selectSearchTerm } from "store/selectors";
-import { consonants, vowels } from "constants/ipa";
 
 const useStyles = makeStyles((theme) => ({
   showIpaText: {
@@ -34,10 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IPAKeyboard = () => {
+const VirtualKeyboard = ({ children }) => {
   const [showIpa, setShowIpa] = useState(false);
-  const searchTerm = useSelector(selectSearchTerm);
-  const dispatch = useDispatch();
 
   const styleProps = {
     showIpa,
@@ -48,12 +40,8 @@ const IPAKeyboard = () => {
     setShowIpa(!showIpa);
   };
 
-  const handleClick = (symbol) => {
-    dispatch(updateSearchBar(searchTerm + symbol));
-  };
-
   return (
-    <Grid container justify="center">
+    <Grid item xs={12} container justify="center">
       <Grid item xs={12}>
         <Button
           onClick={handleShowIpa}
@@ -73,24 +61,11 @@ const IPAKeyboard = () => {
           spacing={0}
           className={classes.keyboard}
         >
-          <Grid item xs={12}>
-            <IPASymbolContainer
-              title="Consonants"
-              symbols={consonants}
-              handleClick={handleClick}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <IPASymbolContainer
-              title="Vowels"
-              symbols={vowels}
-              handleClick={handleClick}
-            />
-          </Grid>
+          {children}
         </Grid>
       </Collapse>
     </Grid>
   );
 };
 
-export default IPAKeyboard;
+export default VirtualKeyboard;

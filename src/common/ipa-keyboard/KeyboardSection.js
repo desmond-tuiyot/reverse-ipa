@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-import IPASymbol from "./IPASymbol";
+import IPASymbol from "./Symbol";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +22,7 @@ const IPASymbolContainer = ({ title, symbols, handleClick }) => {
   const classes = useStyles();
 
   return (
-    <Grid container justify="center" className={classes.root}>
+    <Grid item xs={12} container justify="center" className={classes.root}>
       <Container disableGutters>
         <Grid item xs={12} className={classes.titleContainer}>
           <Typography color="primary" className={classes.title}>

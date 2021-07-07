@@ -1,27 +1,18 @@
-import { useSelector } from "react-redux";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import * as React from "react";
+import { Typography, Grid, Container, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useHistory } from "react-router";
-import isEmpty from "lodash/isEmpty";
+import { useHistory, useLocation } from "react-router";
 
-import SearchComponent from "common/search/SearchComponent";
+import SearchBar from "common/search/SearchBar";
+import SearchFilters from "common/filter/SearchFilters";
+import VirtualKeyboard from "common/ipa-keyboard/VirtualKeyboard";
+import KeyboardSection from "common/ipa-keyboard/KeyboardSection";
 import SearchResultsCard from "common/search/SearchResultsCard";
-import {
-  selectSearchResults,
-  selectSearchType,
-  selectDelayedSearchTerm,
-  selectStatus,
-} from "store/selectors";
 import Appbar from "common/Appbar";
 import NoResultsPage from "common/NoResultsPage";
 import TopProgressBar from "common/TopProgressBar";
-import {
-  useUpdateSearchOnFilterChange,
-  useUpdateSearchOnUrlChange,
-} from "hooks";
+import { filterDetails, initialFilterValues } from "constants/filter-options";
+import { consonants, vowels } from "constants/ipa";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,32 +39,99 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchResultsPage = () => {
+const formatResults = (results) => {
+  return results.map((result) => {
+    // does frontend know too much about the backend data?
+    // is it ok for this to be dependent on the shape of the data/
+    const toIpa = result.hasOwnProperty("word");
+    return {
+      searchTerm: toIpa ? result.word : result.ipaTranscription,
+      searchResults: toIpa ? result.ipaTranscriptions : result.words,
+    };
+  });
+};
+
+const Search = () => {
   const classes = useStyles();
+
   let history = useHistory();
+
   const theme = useTheme();
-
-  let searchResults = useSelector(selectSearchResults);
-  let searchType = useSelector(selectSearchType);
-  let delayedSearchTerm = useSelector(selectDelayedSearchTerm);
-  let status = useSelector(selectStatus);
-  // console.log(status);
-
-  // updates search results based on filter changes
-  useUpdateSearchOnFilterChange();
-
-  // allows user to navigate using back and next buttons
-  const paramsToWatch = ["type", "position", "term"];
-  useUpdateSearchOnUrlChange(paramsToWatch);
-
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const handleClick = () => {
     history.push("/");
   };
 
+  // Search States and Methods
+  const [query, setQuery] = React.useState("");
+  const [filters, setFilters] = React.useState(initialFilterValues);
+
+  const { type, position } = filters;
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    let value = e.target.value.trim().toLowerCase();
+    setQuery(value);
+  };
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    setQuery("");
+  };
+
+  const handleVirtualKeyboardClick = (symbol) => {
+    setQuery((searchTerm) => searchTerm + symbol);
+  };
+
+  const handleFilterChange = (filter, value) => {
+    setFilters((filters) => ({ ...filters, [filter]: value }));
+  };
+
+  const handleSearch = () => {
+    history.push(`/search/?query=${query}&type=${type}&position=${position}`);
+  };
+
+  // data fetching logic
+
+  const [data, setData] = React.useState([]);
+  const [status, setStatus] = React.useState("idle"); // idle | loading | success | error
+  const [error, setError] = React.useState();
+
+  const { pathname, search } = useLocation();
+  // console.log(pathname, search);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        setStatus("loading");
+        const res = await window.fetch(
+          `http://localhost:5000/api/v1/search${search}&skip=0`,
+          {
+            method: "GET",
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error("Network error");
+        }
+
+        const data = await res.json();
+        setData(data);
+        setStatus("success");
+      } catch (err) {
+        setStatus("error");
+        setError(err.message);
+      }
+    })();
+  }, [pathname, search]);
+
+  const isLoading = status === "loading";
+  const isError = status === "error";
+  const isEmpty = status === "success" && data.length === 0;
+
   const searchResultHeader =
-    searchType === "toWord"
+    type === "toWord"
       ? `Words containing the IPA symbol(s) `
       : `IPA transcription(s) for `;
 
@@ -110,35 +168,52 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      <TopProgressBar />
+      {isLoading && <TopProgressBar />}
       <Container maxWidth="sm" className={classes.root}>
         <Grid container spacing={3} justify="flex-end">
           {matches ? order.overXs : order.underXs}
-          <SearchComponent />
-          {!isEmpty(searchResults) ? (
-            <Grid item xs={12}>
-              <Typography className={classes.resultDescription}>
-                {searchResultHeader}
-                <span className={classes.searchTerm}>{delayedSearchTerm}</span>
-              </Typography>
-            </Grid>
-          ) : status === "success" ? (
+          <SearchBar
+            searchTerm={query}
+            handleSearch={handleSearch}
+            handleClear={handleClear}
+            handleChange={handleChange}
+          />
+          <VirtualKeyboard>
+            <KeyboardSection
+              handleClick={handleVirtualKeyboardClick}
+              title="consonants"
+              symbols={consonants}
+            />
+            <KeyboardSection
+              handleClick={handleVirtualKeyboardClick}
+              title="vowels"
+              symbols={vowels}
+            />
+          </VirtualKeyboard>
+          <SearchFilters
+            filters={filters}
+            filterDetails={filterDetails}
+            handleChange={handleFilterChange}
+          />
+          {isEmpty || isError ? (
             <NoResultsPage />
-          ) : null}
-          <Grid item xs={12}>
-            {searchResults &&
-              searchResults.map((result, index) => (
+          ) : isLoading ? (
+            <div>Loading ...</div>
+          ) : (
+            <Grid item xs={12}>
+              {formatResults(data).map((result, index) => (
                 <SearchResultsCard
                   key={index}
                   {...result}
                   header={searchResultHeader}
                 />
               ))}
-          </Grid>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </>
   );
 };
 
-export default SearchResultsPage;
+export default Search;

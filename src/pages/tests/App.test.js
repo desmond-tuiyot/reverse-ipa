@@ -17,7 +17,7 @@ test("searching for ipa transcription on homepage renders list of words that mat
       <Route exact path="/">
         <HomePage />
       </Route>
-      <Route exact path="/results">
+      <Route exact path="/search">
         <Search />
       </Route>
     </>
@@ -50,7 +50,7 @@ test("searching for word on homepage renders list of ipa transcriptions for that
       <Route exact path="/">
         <HomePage />
       </Route>
-      <Route exact path="/results">
+      <Route exact path="/search">
         <Search />
       </Route>
     </>
