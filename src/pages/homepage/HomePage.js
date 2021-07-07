@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Typography, Grid, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router";
 
 import Appbar from "common/Appbar";
 import SearchBar from "common/search/SearchBar";
@@ -9,7 +8,7 @@ import SearchFilters from "common/filter/SearchFilters";
 import VirtualKeyboard from "common/ipa-keyboard/VirtualKeyboard";
 import KeyboardSection from "common/ipa-keyboard/KeyboardSection";
 import { consonants, vowels } from "constants/ipa";
-import { filterDetails, initialFilterValues } from "constants/filter-options";
+import { filterDetails } from "constants/filter-options";
 import useSearch from "hooks/useSearch";
 
 const useStyles = makeStyles((theme) => ({

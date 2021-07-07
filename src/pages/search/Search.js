@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Typography, Grid, Container, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 
 import SearchBar from "common/search/SearchBar";
 import SearchFilters from "common/filter/SearchFilters";
@@ -11,7 +11,7 @@ import SearchResultsCard from "common/search/SearchResultsCard";
 import Appbar from "common/Appbar";
 import NoResultsPage from "common/NoResultsPage";
 import TopProgressBar from "common/TopProgressBar";
-import { filterDetails, initialFilterValues } from "constants/filter-options";
+import { filterDetails } from "constants/filter-options";
 import { consonants, vowels } from "constants/ipa";
 import useSearch from "hooks/useSearch";
 import useFetchData from "hooks/useFetchData";
